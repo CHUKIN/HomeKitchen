@@ -27,7 +27,7 @@ namespace HomeKitchen.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Moder")]
         public ActionResult Test()
         {
             string result = "Вы не авторизованы";
@@ -35,7 +35,8 @@ namespace HomeKitchen.Controllers
             {
                 result = "Ваш логин: " + User.Identity.Name;
             }
-            return Content(result);
+            ViewBag.Message = result;
+            return View();
         }
     }
 }
