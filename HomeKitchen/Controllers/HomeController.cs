@@ -26,5 +26,16 @@ namespace HomeKitchen.Controllers
 
             return View();
         }
+
+        [Authorize]
+        public ActionResult Test()
+        {
+            string result = "Вы не авторизованы";
+            if (User.Identity.IsAuthenticated)
+            {
+                result = "Ваш логин: " + User.Identity.Name;
+            }
+            return Content(result);
+        }
     }
 }
