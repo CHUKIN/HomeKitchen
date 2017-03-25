@@ -21,9 +21,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
+                    @if (User.IsInRole("Moder"))
+                    {
+                        <li>@Html.ActionLink("ModerMenu", "Index", "Moder")</li>
+                    }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("AdminMenu", "Index", "Admin")</li>
+                        }
                     <li>@Html.ActionLink("Test", "Test", "Home")</li>
                     <li>@Html.ActionLink("Зарегестрироваться", "Register", "Account")</li>
                     <li>@Html.ActionLink("Выйти", "Logoff", "Account")</li>

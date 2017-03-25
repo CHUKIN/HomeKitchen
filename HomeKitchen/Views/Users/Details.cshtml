@@ -1,0 +1,74 @@
+﻿@model HomeKitchen.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Role.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserProfile.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserProfile.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfRegistration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfRegistration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Locked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Locked)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

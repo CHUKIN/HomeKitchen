@@ -27,13 +27,14 @@ namespace HomeKitchen.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Moder")]
+        [Authorize]
         public ActionResult Test()
         {
             string result = "Вы не авторизованы";
             if (User.Identity.IsAuthenticated)
             {
-                result = "Ваш логин: " + User.Identity.Name;
+                result = "Ваш логин: " + User.Identity.Name+"\n";
+                result+=User.IsInRole("Admin").ToString();
             }
             ViewBag.Message = result;
             return View();
