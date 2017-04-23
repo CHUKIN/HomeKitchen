@@ -1,52 +1,80 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title – приложение ASP.NET</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (User.IsInRole("Moder"))
-                    {
-                        <li>@Html.ActionLink("ModerMenu", "Index", "Moder")</li>
-                    }
-                        @if (User.IsInRole("Admin"))
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Static navbar -->
+            <div class="navbar navbar-default">
+                <div class="navbar-header">
+                    <!--можно сделать сссылкой-->
+                    <span class="navbar-brand">Домашняя кухня</span>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Главная страница", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Рецепты", "Search", "Home")</li>
+                    </ul>
+                    @{
+                        if (User.IsInRole("Moder") || User.IsInRole("Admin") || User.IsInRole("User"))
                         {
-                            <li>@Html.ActionLink("AdminMenu", "Index", "Admin")</li>
+                            <form class="nav navbar-nav navbar-right navbar-form">
+                                <div class="btn-group">
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
+                                            <span class="glyphicon glyphicon-user"></span> <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>@Html.ActionLink("Профиль", "Account", "Home")</li>
+
+                                            <li>@Html.ActionLink("Мои рецепты", "Search", "Home")</li>
+                                            <li>@Html.ActionLink("Избранное", "Search", "Home")</li>
+                                        </ul>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-success ">Выйти</button>
+                                    </div>
+                                </div>
+                            </form>
                         }
-                    <li>@Html.ActionLink("Test", "Test", "Home")</li>
-                    <li>@Html.ActionLink("Зарегестрироваться", "Register", "Account")</li>
-                    <li>@Html.ActionLink("Выйти", "Logoff", "Account")</li>
-                </ul>
+                        else
+                        {
+                            <form class="nav navbar-nav navbar-right navbar-form">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success ">Войти</button>
+                                </div>
+                                <div class="form-group ">
+                                    <button type="button" class="btn btn-success ">Регистрация</button>
+                                </div>
+                            </form>
+                        }
+                    }
+                </div><!--/.nav-collapse -->
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
-        </footer>
-    </div>
+</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer class="text-center">
+        <a href="#">Наверх</a>
+    </footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 </body>
 </html>
 
