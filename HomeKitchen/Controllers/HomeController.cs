@@ -27,6 +27,16 @@ namespace HomeKitchen.Controllers
         {
             return View();
         }
-       
+
+        public ActionResult Favorites()
+        {
+            return View();
+        }
+
+        public ActionResult MyRecipies()
+        {
+            return View();
+        }
+
     }
 }
