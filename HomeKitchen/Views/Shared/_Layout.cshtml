@@ -21,8 +21,23 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Главная страница", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Рецепты", "Search", "Home")</li>
+                        @if (ViewBag.Title == "Главная страница")
+                        {
+                            <li class="active">@Html.ActionLink("Главная страница", "Index", "Home")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Главная страница", "Index", "Home")</li>
+                        }
+                        @if (ViewBag.Title == "Рецепты")
+                        {
+                            <li class="active">@Html.ActionLink("Рецепты", "Search", "Home")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Рецепты", "Search", "Home")</li>
+                        }
+
                     </ul>
                     @{
                         if (User.IsInRole("Moder") || User.IsInRole("Admin") || User.IsInRole("User"))
@@ -35,9 +50,8 @@
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
                                             <li>@Html.ActionLink("Профиль", "Account", "Home")</li>
-
-                                            <li>@Html.ActionLink("Мои рецепты", "Search", "Home")</li>
-                                            <li>@Html.ActionLink("Избранное", "Search", "Home")</li>
+                                            <li>@Html.ActionLink("Мои рецепты", "MyRecipies", "Home")</li>
+                                            <li>@Html.ActionLink("Избранное", "Favorites", "Home")</li>
                                         </ul>
                                     </div>
                                     <div class="form-group">
