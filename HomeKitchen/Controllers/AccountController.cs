@@ -16,7 +16,6 @@ namespace HomeKitchen.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
             if (ModelState.IsValid)
@@ -47,7 +46,6 @@ namespace HomeKitchen.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -83,7 +81,7 @@ namespace HomeKitchen.Controllers
             return View(model);
         }
 
-        public ActionResult Logoff()
+        public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");

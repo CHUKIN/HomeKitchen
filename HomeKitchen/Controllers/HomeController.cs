@@ -13,31 +13,20 @@ namespace HomeKitchen.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Search()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Account()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
-        [Authorize]
-        public ActionResult Test()
+        public ActionResult Recipe(int id)
         {
-            string result = "Вы не авторизованы";
-            if (User.Identity.IsAuthenticated)
-            {
-                result = "Ваш логин: " + User.Identity.Name+"\n";
-                result+=User.IsInRole("Admin").ToString();
-            }
-            ViewBag.Message = result;
             return View();
         }
+       
     }
 }

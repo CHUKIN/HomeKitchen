@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace HomeKitchen.Controllers
 {
-    [Authorize(Roles ="Moder")]
+    //[Authorize(Roles ="Moder")]
     public class ModerController : Controller
     {
         // GET: Moder

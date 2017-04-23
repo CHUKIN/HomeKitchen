@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace HomeKitchen.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         // GET: Admin

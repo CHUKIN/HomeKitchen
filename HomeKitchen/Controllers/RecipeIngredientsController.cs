@@ -10,7 +10,7 @@ using HomeKitchen.Models;
 
 namespace HomeKitchen.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   // [Authorize(Roles = "Admin")]
     public class RecipeIngredientsController : Controller
     {
         private KitchenContext db = new KitchenContext();
