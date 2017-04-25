@@ -1,5 +1,7 @@
-﻿using System;
+﻿using HomeKitchen.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +10,8 @@ namespace HomeKitchen.Controllers
 {
     public class HomeController : Controller
     {
+        KitchenContext db = new KitchenContext();
+
         public ActionResult Index()
         {
             return View();
@@ -15,7 +19,7 @@ namespace HomeKitchen.Controllers
 
         public ActionResult Search()
         {
-            return View();
+            return View(db.Categorys.Include(i=>i.Tags));
         }
 
         public ActionResult Account()
