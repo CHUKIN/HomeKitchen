@@ -3,61 +3,96 @@
     ViewBag.Title = "Рецепты";
 }
 
+<script>
+    $(document).ready(function () {
+        var container1 = document.getElementById("listRecipies1");
+        var container2 = document.getElementById("listRecipies2");
+        var container3 = document.getElementById("listRecipies3");
+        for (var i = 0; i < 16; i++) {
+            var img = document.createElement('img');
+            img.classList.add("img-responsive");
+            img.classList.add("img-rounded");
+            img.setAttribute('alt', "140x140");
+            img.setAttribute('src', "");
+            img.style.width = '140px';
+            img.style.height = '140px';
+            
+            var h2 = document.createElement('h2');
+            h2.innerText = 'Название';
+            
+            var p = document.createElement('p');
+            p.innerText = 'Краткое описание';
+            var a = document.createElement('a');
+            a.classList.add('btn');
+            a.classList.add('btn-default');
+            a.setAttribute('href', '#');
+            a.setAttribute('role', 'button');
+            a.innerText = 'Подробнее >>';
+            p.appendChild(a);
+
+            switch (i % 3)
+            {
+                case 1:
+                    {
+                        container1.appendChild(img);
+                        container1.appendChild(h2);
+                        container1.appendChild(p);
+                        break;
+                    }
+                case 2:
+                    {
+                        container2.appendChild(img);
+                        container2.appendChild(h2);
+                        container2.appendChild(p);
+                        break;
+                    }
+                case 0:
+                    {
+                        container3.appendChild(img);
+                        container3.appendChild(h2);
+                        container3.appendChild(p);
+                        break;
+                    }
+           
+            }
+           
+        }
+        
+    });
+
+</script>
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <div class="panel-group">
-                <div class="panel panel-default">
+            <div class="panel-group" id="accordion">
+                @{
+                    foreach (var category in Model)
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#@category.Name">@category.Name</a>
+                                </h4>
+                            </div>
+                            <div id="@category.Name" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    @{
+                                        foreach (var tag in category.Tags)
+                                        {
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="@tag.Name">@tag.Name</label>
+                                            </div>
+                                        }
+                                    }
+                                    
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="panel-heading ">
-                        <h4 class="panel-title">
-                            <a data-toddle="collapse" href="#">Категория1</a>
-                        </h4>
-                    </div>
-                    <div id="1" class="panel-collapse collapse dropdown-menu">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Тег1">Тег1</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Тег2">Тег2</label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toddle="collapse" href="#">Категория2</a>
-                        </h4>
-                    </div>
-                    <div id="2" class="panel-collapse collapse dropdown-menu">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Тег3">Тег3</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Тег4">Тег4</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Тег5">Тег5</label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
+                    }
+                }
             </div>
-
-
         </div>
 
 
@@ -78,17 +113,31 @@
                 </div>
             </form>
 
-            <div class="col-md-3">
-                <img class="img-responsive img-rounded" alt="140x140" src="" style="width: 140px; height: 140px;">
-                <h2>Название</h2>
-                <p>Краткое описание.</p>
-                <p>
-                    <a class="btn btn-default" href="#" role="button">Подробнее »</a>
-                </p>
+            <div class="col-md-4">
+               <div id="listRecipies1">
+
+                 
+               </div>
             </div>
+            <div class="col-md-4">
+                <div id="listRecipies2">
+
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="listRecipies3">
+
+
+                </div>
+            </div>
+
+          
 
 
         </div>
+
+
 
     </div>
 
