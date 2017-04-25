@@ -1,7 +1,131 @@
 ﻿
 @{
-    ViewBag.Title = "Recipe";
+    ViewBag.Title = "Название рецепта";
 }
 
-<h2>Recipe</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">Название рецепта</h2><br>
 
+            <div class="col-md-5">
+                <img class="img-rounded img-responsive" alt="Фото" src="http://lfly.ru/wp-content/uploads/2017/03/40-eda-oboi-kartinki-foto-1920x1080.jpg">
+                <br>
+            </div>
+            <div class="col-md-7">
+                <p>
+                    Краткое описание.Краткое описание.Краткое описание.<br>Краткое описание.Краткое описание.
+                </p>
+                <label>Время пригототовления:</label>
+                <p>20 минут</p>
+                <br>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-1">Дата:</label>
+                        <p class="col-md-4">@DateTime.Now.Date</p>
+                        <label class="col-md-1">Автор:</label>
+                        <a class="col-md-4" href="Account.cshtml">Паша</a>
+                    </div>
+                </div>
+                <form class="form-horizontal">
+                    <button class="btn btn-default col-md-1" type="submit">
+                        <span class="glyphicon glyphicon-heart"></span>
+                    </button>
+                    <h4 class="col-md-1">5</h4>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-horizontal">
+                <label class="col-md-1 control-label">Теги: </label>
+                <div class="col-md-11">
+                    <ul>
+                        <li class="btn btn-default">Второе</li>
+                        <li class="btn btn-default">Быстро</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center">Ингредиенты</h4><br>
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <ol>
+                    <li>Картошка 5 шт.</li>
+                    <li>Помидоры 3 шт.</li>
+                    <li>Мясо 500 г.</li>
+                </ol>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center">Приготовление</h4><br>
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <ol>
+                    <li>
+                        <p>Чистим картошку</p>
+                        <br>
+                        <img class="img-rounded img-responsive" alt="Фото" src="http://fb.ru/misc/i/gallery/38228/1412636.jpg">
+                        <br>
+                    </li>
+                    <li>
+                        <p>Нарезаем овощи</p>
+                        <br>
+                        <img class="img-rounded img-responsive" alt="Фото" src="http://www.mhealth.ru/upload/iblock/ac1/ac1df981b21a93f9773901221c6409bc.jpg">
+                        <br>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center">Комментарии</h4><br>
+            <div class="form-horizontal">
+
+                <form class="form-group">
+                    <div class="col-md-1">
+                        <img class="img-circle img-responsive" alt="Фото" styles="height:50px, width:50px" src="https://files5.adme.ru/files/news/part_119/1193760/6844760-3-650-a542d8629a-1484643195.jpg">
+                    </div>
+                    <div class="col-md-11">
+                        <label class="col-md-2">Текущий юзер</label>
+                    </div>
+                    <div class="col-md-11">
+                        <textarea class="form-control" placeholder="Введите комментарий..." rows="3"></textarea>
+                        <button class="btn btn-default " type="submit">Отправить</button>
+                    </div>
+                </form>
+
+                <br>
+                <div class="form-group">
+                    <div class="col-md-1">
+                        <img class="img-circle img-responsive" alt="Фото" styles="height:50px; width:50px" src="https://files5.adme.ru/files/news/part_119/1193760/6844760-3-650-a542d8629a-1484643195.jpg">
+                    </div>
+                    <div class="col-md-11">
+                        <label class="col-md-2">Катя</label>
+                        <label class="col-md-4">@DateTime.Now.Date</label>
+                    </div>
+                    <div class="col-md-11">
+                        <p >Очень вкусно, ням-ням! вв вввввв ввв вввввввввввввввв вввввввввввввввв ввввввввв dddddddd dddddddddddddd ddddddddddddd dddddddddd ввввввввввввввввввввв ввввввввввв вввввввввв ввввв</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
