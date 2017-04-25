@@ -5,60 +5,70 @@
 
 <script>
     $(document).ready(function () {
+        $.getJSON('GetRecipies', function (data) {
+            fill(data);
+        });
+    });
+
+    function fill(data) {
         var container1 = document.getElementById("listRecipies1");
         var container2 = document.getElementById("listRecipies2");
         var container3 = document.getElementById("listRecipies3");
-        for (var i = 0; i < 16; i++) {
-            var img = document.createElement('img');
-            img.classList.add("img-responsive");
-            img.classList.add("img-rounded");
-            img.setAttribute('alt', "140x140");
-            img.setAttribute('src', "");
-            img.style.width = '140px';
-            img.style.height = '140px';
-            
-            var h2 = document.createElement('h2');
-            h2.innerText = 'Название';
-            
-            var p = document.createElement('p');
-            p.innerText = 'Краткое описание';
-            var a = document.createElement('a');
-            a.classList.add('btn');
-            a.classList.add('btn-default');
-            a.setAttribute('href', '#');
-            a.setAttribute('role', 'button');
-            a.innerText = 'Подробнее >>';
-            p.appendChild(a);
 
-            switch (i % 3)
-            {
-                case 1:
-                    {
-                        container1.appendChild(img);
-                        container1.appendChild(h2);
-                        container1.appendChild(p);
-                        break;
-                    }
-                case 2:
-                    {
-                        container2.appendChild(img);
-                        container2.appendChild(h2);
-                        container2.appendChild(p);
-                        break;
-                    }
-                case 0:
-                    {
-                        container3.appendChild(img);
-                        container3.appendChild(h2);
-                        container3.appendChild(p);
-                        break;
-                    }
-           
-            }
-           
-        }
-        
-    });
+        var i = 0;
+        $.each(data, function (key, val) {
+                var img = document.createElement('img');
+                img.classList.add("img-responsive");
+                img.classList.add("img-rounded");
+                img.setAttribute('alt', "140x140");
+                img.setAttribute('src', val['PhotoUrl']);
+                img.style.width = '140px';
+                img.style.height = '140px';
+
+                var h2 = document.createElement('h2');
+                h2.innerText = val['Name'];
+
+                var p = document.createElement('p');
+                p.innerText = val['Preview'];
+                var a = document.createElement('a');
+                a.classList.add('btn');
+                a.classList.add('btn-default');
+                a.setAttribute('href', 'Recipe/' + val['Id']);
+                a.setAttribute('role', 'button');
+                a.innerText = 'Подробнее >>';
+                p.appendChild(a);
+
+                switch (i % 3) {
+                    case 1:
+                        {
+                            container1.appendChild(img);
+                            container1.appendChild(h2);
+                            container1.appendChild(p);
+                            break;
+                        }
+                    case 2:
+                        {
+                            container2.appendChild(img);
+                            container2.appendChild(h2);
+                            container2.appendChild(p);
+                            break;
+                        }
+                    case 0:
+                        {
+                            container3.appendChild(img);
+                            container3.appendChild(h2);
+                            container3.appendChild(p);
+                            break;
+                        }
+
+                }
+                i++;
+
+
+
+        });
+    }
+
 
 </script>
 

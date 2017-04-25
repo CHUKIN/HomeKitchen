@@ -42,5 +42,9 @@ namespace HomeKitchen.Controllers
             return View();
         }
 
+        public ActionResult GetRecipies()
+        {
+            return Json(db.Recipies,JsonRequestBehavior.AllowGet);
+        }
     }
 }
