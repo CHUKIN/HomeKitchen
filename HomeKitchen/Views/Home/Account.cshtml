@@ -1,7 +1,75 @@
 ﻿
 @{
-    ViewBag.Title = "Account";
+    ViewBag.Title = "Профиль";
 }
 
-<h2>Account</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
 
+            <div class="col-md-4">
+                <img class="img-circle img-responsive" alt="Фото" src="" styles="height:200px; width:200px">
+                <br>
+                <p>@Html.ActionLink("Мои рецепты", "MyRecipies", "Home")</p>
+                <p>@Html.ActionLink("Избранное", "Favorites", "Home")</p>
+
+            </div>
+
+            <div class="col-md-8">
+                <form role="form">
+                    <div class="form-horizontal">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Логин</label>
+                            <p class="col-md-6">Какой-то логин</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2">Пароль</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2">Email</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2">Дата регистрации</label>
+                            <p class="col-md-6">@DateTime.Now.Date</p>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group">
+                            <label class="col-md-2">Имя</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2">Пол</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2">Возраст</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+
+
+                </div>
+
+        </div>
+    </div>
+</div>
