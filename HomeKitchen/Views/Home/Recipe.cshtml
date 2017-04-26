@@ -45,8 +45,12 @@
                 <label class="col-md-1 control-label">Теги: </label>
                 <div class="col-md-11">
                     <ul>
-                        <li class="btn btn-default">Второе</li>
-                        <li class="btn btn-default">Быстро</li>
+                       @{
+                           foreach (var tag in Model.Tags)
+                           {
+                            <li class="btn btn-default">@tag.Tag.Name</li>
+                           }
+                    }
                     </ul>
                 </div>
             </div>
@@ -59,9 +63,12 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <ol>
-                    <li>Картошка 5 шт.</li>
-                    <li>Помидоры 3 шт.</li>
-                    <li>Мясо 500 г.</li>
+                    @{
+                        foreach (var ingredient in Model.Ingredient)
+                        {
+                            <li>@ingredient.Ingredient.Name @ingredient.Amount @ingredient.Measure.Name</li>
+                        }
+                    }
                 </ol>
             </div>
             <div class="col-md-3"></div>
@@ -100,10 +107,10 @@
 
                 <form class="form-group">
                     <div class="col-md-1">
-                        <img class="img-circle img-responsive" alt="Фото" styles="height:50px, width:50px" src="https://files5.adme.ru/files/news/part_119/1193760/6844760-3-650-a542d8629a-1484643195.jpg">
+                        <img class="img-circle img-responsive" alt="Фото" styles="height:50px, width:50px" src="@Model.User.UserProfile.PhotoUrl">
                     </div>
                     <div class="col-md-11">
-                        <label class="col-md-2">Текущий юзер</label>
+                        <label class="col-md-2">@User.Identity.Name</label>
                     </div>
                     <div class="col-md-11">
                         <textarea class="form-control" placeholder="Введите комментарий..." rows="3"></textarea>
@@ -112,18 +119,23 @@
                 </form>
 
                 <br>
-                <div class="form-group">
-                    <div class="col-md-1">
-                        <img class="img-circle img-responsive" alt="Фото" styles="height:50px; width:50px" src="https://files5.adme.ru/files/news/part_119/1193760/6844760-3-650-a542d8629a-1484643195.jpg">
-                    </div>
-                    <div class="col-md-11">
-                        <label class="col-md-2">Катя</label>
-                        <label class="col-md-4">@DateTime.Now.Date</label>
-                    </div>
-                    <div class="col-md-11">
-                        <p >Очень вкусно, ням-ням! вв вввввв ввв вввввввввввввввв вввввввввввввввв ввввввввв dddddddd dddddddddddddd ddddddddddddd dddddddddd ввввввввввввввввввввв ввввввввввв вввввввввв ввввв</p>
-                    </div>
-                </div>
+                @{
+                    foreach (var comment in Model.Comments)
+                    {
+                        <div class="form-group">
+                            <div class="col-md-1">
+                                <img class="img-circle img-responsive" alt="Фото" styles="height:50px; width:50px" src="@comment.User.UserProfile.PhotoUrl">
+                            </div>
+                            <div class="col-md-11">
+                                <label class="col-md-2">@comment.User.Login</label>
+                                <label class="col-md-4">@comment.Date</label>
+                            </div>
+                            <div class="col-md-11">
+                                <p>@comment.Text</p>
+                            </div>
+                        </div>
+                    }
+                }
 
             </div>
 
