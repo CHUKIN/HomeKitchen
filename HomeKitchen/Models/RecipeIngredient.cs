@@ -12,7 +12,7 @@ namespace HomeKitchen.Models
         [Key]
         [ForeignKey("Ingredient"), Column(Order = 0)]
         public int IngredientId { get; set; }
-        public Ingredient Ingredient { get; set; }
+        public  Ingredient Ingredient { get; set; }
 
         [Key]
         [ForeignKey("Recipe"), Column(Order = 1)]
