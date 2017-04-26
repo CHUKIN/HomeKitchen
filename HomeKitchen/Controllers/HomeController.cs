@@ -22,14 +22,20 @@ namespace HomeKitchen.Controllers
             return View(db.Categorys.Include(i=>i.Tags));
         }
 
-        public ActionResult Account(int id)
+        public ActionResult Account()
         {
-            return View(db.Users.Include(i=>i.UserProfile).FirstOrDefault(i=>i.Id==id));
+            //return View(db.Users.Include(i=>i.UserProfile).FirstOrDefault(i=>i.Id==id));
+            return View();
+        }
+
+        public ActionResult MyAccount()
+        {
+            return View();
         }
 
         public ActionResult Recipe(int id)
         {
-            return View();
+            return View(db.Recipies.Include(i=>i.Tags).Include(j=>j.Steps).Include(k=>k.Ingredient).FirstOrDefault(q=>q.Id==id));
         }
 
         public ActionResult Favorites()

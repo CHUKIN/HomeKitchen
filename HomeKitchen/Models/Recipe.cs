@@ -19,11 +19,13 @@ namespace HomeKitchen.Models
 
         public ICollection<Step> Steps { get; set; }
         public ICollection<TagRecipe> Tags { get; set; }
+        public ICollection<RecipeIngredient> Ingredient { get; set; }
 
         public Recipe()
         {
             Steps = new List<Step>();
             Tags = new List<TagRecipe>();
+            Ingredient = new List<RecipeIngredient>();
         }
     }
 }
