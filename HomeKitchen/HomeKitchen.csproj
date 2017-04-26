@@ -172,6 +172,10 @@
     <Compile Include="Migrations\201703231914383_Init.Designer.cs">
       <DependentUpon>201703231914383_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704251635029_10.cs" />
+    <Compile Include="Migrations\201704251635029_10.Designer.cs">
+      <DependentUpon>201704251635029_10.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -331,6 +335,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703231914383_Init.resx">
       <DependentUpon>201703231914383_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704251635029_10.resx">
+      <DependentUpon>201704251635029_10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

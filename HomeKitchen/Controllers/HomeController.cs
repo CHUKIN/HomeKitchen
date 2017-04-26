@@ -46,5 +46,13 @@ namespace HomeKitchen.Controllers
         {
             return Json(db.Recipies,JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult GetRecipies(string[] tags)
+        {
+
+           
+            return Json(db.Recipies,JsonRequestBehavior.AllowGet);
+        }
     }
 }

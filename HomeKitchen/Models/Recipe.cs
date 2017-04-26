@@ -18,10 +18,12 @@ namespace HomeKitchen.Models
         public User User { get; set; }
 
         public ICollection<Step> Steps { get; set; }
+        public ICollection<TagRecipe> Tags { get; set; }
 
         public Recipe()
         {
             Steps = new List<Step>();
+            Tags = new List<TagRecipe>();
         }
     }
 }
