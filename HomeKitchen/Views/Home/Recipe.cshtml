@@ -1,30 +1,31 @@
-﻿
+﻿@model HomeKitchen.Models.Recipe
 @{
-    ViewBag.Title = "Название рецепта";
+    ViewBag.Title = Model.Name;
 }
+
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="text-center">Название рецепта</h2><br>
+            <h2 class="text-center">@Model.Name</h2><br>
 
             <div class="col-md-5">
-                <img class="img-rounded img-responsive" alt="Фото" src="http://lfly.ru/wp-content/uploads/2017/03/40-eda-oboi-kartinki-foto-1920x1080.jpg">
+                <img class="img-rounded img-responsive" alt="Фото" src="@Model.PhotoUrl">
                 <br>
             </div>
             <div class="col-md-7">
                 <p>
-                    Краткое описание.Краткое описание.Краткое описание.<br>Краткое описание.Краткое описание.
+                    @Model.Preview
                 </p>
                 <label>Время пригототовления:</label>
-                <p>20 минут</p>
+                <p>@Model.CookingTime</p>
                 <br>
                 <div class="form-horizontal">
                     <div class="form-group">
                         <label class="col-md-1">Дата:</label>
-                        <p class="col-md-4">@DateTime.Now.Date</p>
+                        <p class="col-md-4">@Model.DateOfCreation</p>
                         <label class="col-md-1">Автор:</label>
-                        <a class="col-md-4" href="Account.cshtml">Паша</a>
+                        <a class="col-md-4" href="Account.cshtml">@Model.User.UserProfile.Name</a>
                     </div>
                 </div>
                 <form class="form-horizontal">
