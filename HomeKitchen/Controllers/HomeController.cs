@@ -22,9 +22,9 @@ namespace HomeKitchen.Controllers
             return View(db.Categorys.Include(i=>i.Tags));
         }
 
-        public ActionResult Account()
+        public ActionResult Account(int id)
         {
-            return View();
+            return View(db.Users.Include(i=>i.UserProfile).FirstOrDefault(i=>i.Id==id));
         }
 
         public ActionResult Recipe(int id)
@@ -54,5 +54,7 @@ namespace HomeKitchen.Controllers
            
             return Json(db.Recipies,JsonRequestBehavior.AllowGet);
         }
+
+       
     }
 }

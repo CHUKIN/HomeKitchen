@@ -311,10 +311,10 @@
     <Content Include="Views\Home\Recipe.cshtml" />
     <Content Include="Views\Home\Favorites.cshtml" />
     <Content Include="Views\Home\MyRecipies.cshtml" />
+    <Content Include="Views\Home\MyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images" />
     <Folder Include="Images\" />
     <Folder Include="Views\Recipe\" />
   </ItemGroup>
