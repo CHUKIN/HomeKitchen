@@ -3,49 +3,6 @@
     ViewBag.Title = "Редактирование профиля";
 }
 
-<script>
-    function password() {
-
-        var button = document.getElementById("btnChangePassword");
-        button.setAttribute('style','visibility:hidden');
-
-    }
-
-    function email() {
-        var div = document.getElementById("changeEmail");
-        div.setAttribute('style','visibility:hidden');
-
-        var container = document.getElementById("email");
-        container.appendChild(editingElement('text', 'hahhaha'));
-    }
-
-    function editingElement(type, value) {
-        var div = document.createElement('div');
-        div.classList.add('col-md-6');
-
-        var input = document.createElement('input');
-        input.setAttribute('type', type);
-        input.classList.add('form-control');
-        input.innerText = value;
-
-        div.appendChild(input);
-
-        var button = document.createElement('button');
-        button.setAttribute('type', 'submit');
-        button.classList.add('btn');
-        button.classList.add('btn-default');
-        button.classList.add('col-md-1');
-        input.innerText = 'ОК';
-
-        var div1 = document.createElement('div');
-        div1.appendChild(div);
-        div1.appendChild(button);
-        return div1;
-    }
-
-
-</script>
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -60,39 +17,29 @@
                             <span class="glyphicon glyphicon-open"></span>
                         </button>
                     </div>
-
                     <div class="form-group">
                         <label class="col-md-9">Изменить пароль</label>
-
-                        <button class="btn btn-default col-md-3" id="btnChangePassword" type="button" onclick="password()">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-
-                        @*                        <div >*@
-                        @*                            <form >*@
-                        @*                                <div class="form-group">*@
-                        @*                                    <div class="col-md-12">*@
-                        @*                                        <input type="password" class="form-control" placeholder="Старый пароль">*@
-                        @*                                    </div>*@
-                        @*                                </div>*@
-                        @*                                <div class="form-group">*@
-                        @*                                    <div class="col-md-12">*@
-                        @*                                        <input type="password" class="form-control" placeholder="Новый пароль">*@
-                        @*                                    </div>*@
-                        @*                                </div>*@
-                        @*                                <button type="submit" class="btn btn-default col-md-12">Сохранить</button>*@
-                        @*                            </form>*@
-                        @*                        </div>*@
-
-
-
+                        <div >
+                            <form >
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input type="password" class="form-control" placeholder="Старый пароль">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input type="password" class="form-control" placeholder="Новый пароль">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-default col-md-12">Сохранить</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <hr>
 
                 <p>@Html.ActionLink("Мои рецепты", "MyRecipies", "Home")</p>
                 <p>@Html.ActionLink("Избранное", "Favorites", "Home")</p>
-
 
             </div>
 
@@ -111,18 +58,11 @@
                             <div class="col-md-2"></div>
                             <label class="col-md-3">Email</label>
 
-                            <div id="changeEmail">
-                                <p class="col-md-6">hahah@gmail.com</p>
-                                <button class="col-md-1 btn btn-default" onclick="email()">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                            </div>
-
                             <div id="email">
-                                @*                                <div class="col-md-6">*@
-                                @*                                    <input type="text" class="form-control" value="hahah@gmail.com">*@
-                                @*                                </div>*@
-                                @*                                <button type="submit" class="btn btn-default col-md-1">ОК</button>*@
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" value="hahah@gmail.com">
+                                </div>
+                                <button type="submit" class="btn btn-default col-md-1">ОК</button>
                             </div>
 
                         </div>
@@ -139,66 +79,38 @@
                             <div class="col-md-2"></div>
                             <label class="col-md-3">Имя</label>
                             <div>
-                                <p class="col-md-6">Катя</p>
-                                <button class="col-md-1 btn btn-default">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" value="Катя">
+                                </div>
+                                <button type="submit" class="btn btn-default col-md-1">ОК</button>
                             </div>
-                            @*                            <div>*@
-                            @*                                <div class="col-md-6">*@
-                            @*                                    <input type="text" class="form-control" value="Катя">*@
-                            @*                                </div>*@
-                            @*                                <button type="submit" class="btn btn-default col-md-1">ОК</button>*@
-                            @*                            </div>*@
-
                         </div>
                         <div class="form-group">
                             <div class="col-md-2"></div>
                             <label class="col-md-3">Пол</label>
                             <div>
-                                <p class="col-md-6">Женский</p>
-                                <button class="col-md-1 btn btn-default">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
+                                <div class="dropdown col-md-6">
+                                    <select class="form-control">
+                                        <option value="">Женский</option>
+                                        <option value="">Мужской</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-default col-md-1">ОК</button>
                             </div>
-
-                            @*                            <div>*@
-                            @*                                <div class="dropdown col-md-6">*@
-                            @*                                    <select class="form-control">*@
-                            @*                                        <option value="">Женский</option>*@
-                            @*                                        <option value="">Мужской</option>*@
-                            @*                                    </select>*@
-                            @*                                </div>*@
-                            @*                                <button type="submit" class="btn btn-default col-md-1">ОК</button>*@
-                            @*                            </div>*@
-
                         </div>
                         <div class="form-group">
                             <div class="col-md-2"></div>
                             <label class="col-md-3">Возраст</label>
-
                             <div>
-                                <p class="col-md-6">25</p>
-                                <button class="col-md-1 btn btn-default">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" value="25">
+                                </div>
+                                <button type="submit" class="btn btn-default col-md-1">ОК</button>
                             </div>
-
-                            @*                            <div>*@
-                            @*                                <div class="col-md-6">*@
-                            @*                                    <input type="number" class="form-control" value="25">*@
-                            @*                                </div>*@
-                            @*                                <button type="submit" class="btn btn-default col-md-1">ОК</button>*@
-                            @*                            </div>*@
-
                         </div>
-
                     </div>
                 </form>
-
-
             </div>
-
         </div>
     </div>
 </div>
