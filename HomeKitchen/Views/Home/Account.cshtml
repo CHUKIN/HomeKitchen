@@ -3,13 +3,13 @@
     ViewBag.Title = "Профиль";
 }
 
-<script>
-    function link() {
-        window.location.href = "MyAccount";
-//        window.open('MyAccount');
-    }
-
-</script>
+@*<script>*@
+@*    function link() {*@
+@*        window.location.href = "MyAccount";*@
+@*//        window.open('MyAccount');*@
+@*    }*@
+@**@
+@*</script>*@
 
 <div class="container">
     <div class="row">
@@ -21,7 +21,8 @@
 
                 <form role="form">
                     <div class="form-group">
-                        <button class="btn btn-default form-control" type="button" onclick="link()">Редактировать</button>
+                        <a class="btn btn-default form-control" href="MyAccount.cshtml">Редактировать</a>
+@*                        <button class="btn btn-default form-control" type="button" onclick="link()">Редактировать</button>*@
                     </div>
                 </form>
 

@@ -75,7 +75,8 @@
                                     <button type="submit" class="btn btn-success ">Войти</button>
                                 </div>
                                 <div class="form-group ">
-                                    <button type="button" class="btn btn-success" onclick="link()">Регистрация</button>
+                                    <a class="btn btn-success form-control" href="../Account/Register.cshtml">Редактировать</a>
+@*                                    <button type="button" class="btn btn-success" onclick="link()">Регистрация</button>*@
                                 </div>
                             </form>
                         }
@@ -98,11 +99,11 @@
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
 
-<script>
-    function link() {
-        window.location.href = "/Account/Register";
-    }
-</script>
+@*<script>*@
+@*    function link() {*@
+@*        window.location.href = "/Account/Register";*@
+@*    }*@
+@*</script>*@
 
 </body>
 </html>
