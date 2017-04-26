@@ -35,7 +35,21 @@ namespace HomeKitchen.Controllers
 
         public ActionResult Recipe(int id)
         {
-            return View(db.Recipies.Include(i=>i.Tags).Include(j=>j.Steps).Include(k=>k.Ingredient).FirstOrDefault(q=>q.Id==id));
+            var result = from recipe in db.Recipies
+                         join user in db.Users on recipe.UserId equals user.Id
+                         where recipe.Id == id
+                         select new 
+                         {
+                             Name = recipe.Name,
+                             User = user.Login
+                         };
+            Recipe recipeResult = new Recipe()
+            {
+                Name = result.GetType().Name,
+               // User = result.GetType().User,
+
+            };
+            return View(recipeResult);
         }
 
         public ActionResult Favorites()
@@ -60,6 +74,8 @@ namespace HomeKitchen.Controllers
            
             return Json(db.Recipies,JsonRequestBehavior.AllowGet);
         }
+
+       
 
        
     }
