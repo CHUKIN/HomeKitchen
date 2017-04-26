@@ -1,51 +1,70 @@
 ﻿@model HomeKitchen.Models.RegisterModel
 
 @{
+    Layout = null;
     ViewBag.Title = "Регистрация";
 }
 
-<h2>Регистрация</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
 
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2 class="text-center">Регистрация</h2>
+            <br>
+            <div class="col-md-3"></div>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+            <form class="form-horizontal col-md-6">
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <label class="col-md-3">Логин</label>
+                    <input type="text" class="form-control col-md-3">
+                    <div class="col-md-3"></div>
+                </div>
 
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true)
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <label class="col-md-3">Пароль</label>
+                    <input type="password" class="form-control col-md-3">
+                    <div class="col-md-3"></div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Login, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Login)
-                @Html.ValidationMessageFor(model => model.Login)
-            </div>
-        </div>
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <label class="col-md-3">Повторите пароль</label>
+                    <input type="password" class="form-control col-md-3">
+                    <div class="col-md-3"></div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>
-        </div>
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-offset-3 col-md-3">
+                        <button type="submit" class="btn btn-default">Зарегистрировать</button>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </form>
+            <div class="col-md-3"></div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ConfirmPassword)
-                @Html.ValidationMessageFor(model => model.ConfirmPassword)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Зарегистрировать" class="btn btn-default" />
-            </div>
         </div>
     </div>
-}
+</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>
+
