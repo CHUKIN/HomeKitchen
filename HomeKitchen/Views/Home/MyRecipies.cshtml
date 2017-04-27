@@ -1,7 +1,27 @@
 ﻿
 @{
-    ViewBag.Title = "MyRecipies";
+    ViewBag.Title = "Мои рецепты";
 }
 
-<h2>MyRecipies</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">Мои рецепты</h2><br>
 
+            <div class="form-group">
+                <a class="btn btn-default form-control" href="NewRecipe">Новый рецепт</a>
+            </div>
+            <br>
+
+            @*по 4 в строке, можно просто последовательно добавлять для каждого*@
+            <div class="col-md-3 text-center">
+                <img class="img-rounded img-responsive" alt="Картинка" src="http://fb.ru/misc/i/gallery/38228/1412636.jpg" >
+                <h3>Название</h3>
+                <p>Краткое описание</p>
+                <p><a class="btn btn-default" href="Recipe/5" role="button">Подробнее »</a></p>
+            </div>
+
+
+        </div>
+    </div>
+</div>
