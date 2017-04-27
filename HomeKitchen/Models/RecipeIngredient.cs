@@ -9,6 +9,9 @@ namespace HomeKitchen.Models
 {
     public class RecipeIngredient
     {
+        
+
+
         [Key]
         [ForeignKey("Ingredient"), Column(Order = 0)]
         public int IngredientId { get; set; }
