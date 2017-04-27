@@ -308,6 +308,7 @@
     <Content Include="Views\Home\Favorites.cshtml" />
     <Content Include="Views\Home\MyRecipies.cshtml" />
     <Content Include="Views\Home\MyAccount.cshtml" />
+    <Content Include="Views\Home\NewRecipe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

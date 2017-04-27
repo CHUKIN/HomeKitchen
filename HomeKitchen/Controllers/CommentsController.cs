@@ -54,6 +54,7 @@ namespace HomeKitchen.Controllers
         {
             if (ModelState.IsValid)
             {
+                comment.Date = DateTime.Now;
                 db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");

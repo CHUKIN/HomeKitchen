@@ -81,8 +81,14 @@ namespace HomeKitchen.Controllers
             return Json(db.Recipies,JsonRequestBehavior.AllowGet);
         }
 
-       
+        public ActionResult NewRecipe()
+        {
+            return View();
+        }
 
-       
+
+
+
+
     }
 }
