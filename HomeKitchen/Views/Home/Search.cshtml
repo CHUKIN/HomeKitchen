@@ -6,7 +6,7 @@
 <script>
     $(document).ready(function() {
         $.getJSON('GetRecipies',
-            function (data) {
+            function(data) {
                 fill(data);
             });
     });
@@ -15,12 +15,9 @@
         var container = document.getElementById("listRecipies");
         container.innerHTML = "";
 
-
         var i = 0;
         $.each(data,
-            function (key, val) {
-
-               
+            function(key, val) {
 
                 var div = document.createElement('div');
                 div.classList.add('col-md-4');
@@ -57,11 +54,10 @@
                 span1.classList.add("glyphicon");
                 if (val['Favourite'] === true) {
                     span1.classList.add("glyphicon-star"); // избранное
-                }
-                else {
+                } else {
                     span1.classList.add("glyphicon-star-empty"); // не избранное
                 }
-               
+
                 p2.appendChild(span1);
 
                 var br = document.createElement('br');
@@ -108,14 +104,10 @@
             <div class="panel-group" id="accordion">
                 <form name="search" id="search">
 
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Поиск" name="searchText" oninput="sendTags()">
+                    </div>
 
-                        <div class="btn-group input-group">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Поиск" name="searchText" oninput="sendTags()">
-                            </div>
-                           
-                        </div>
-                    
                     <br>
 
                     @{
@@ -149,13 +141,10 @@
             </div>
         </div>
 
-       
-           
-                <div id="listRecipies">
 
-                </div>
-       
-       
+        <div id="listRecipies">
+        </div>
+
     </div>
 
 </div>
