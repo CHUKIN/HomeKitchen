@@ -4,77 +4,82 @@
 }
 
 <script>
-    $(document).ready(function () {
-        $.getJSON('GetRecipies', function (data) {
-            fill(data);
-        });
+    $(document).ready(function() {
+        $.getJSON('GetRecipies',
+            function(data) {
+                fill(data);
+            });
     });
 
     function fill(data) {
-        var container1 = document.getElementById("listRecipies1");
-        container1.innerHTML = "";
-        var container2 = document.getElementById("listRecipies2");
-        container2.innerHTML = "";
-        var container3 = document.getElementById("listRecipies3");
-        container3.innerHTML = "";
+        var container = document.getElementById("listRecipies");
+        container.innerHTML = "";
+
 
         var i = 0;
-        $.each(data, function (key, val) {
+        $.each(data,
+            function(key, val) {
                 var img = document.createElement('img');
-                img.classList.add("img-responsive");
                 img.classList.add("img-rounded");
-                img.setAttribute('alt', "140x140");
+                img.classList.add("img-responsive");
+                img.setAttribute('alt', "Картинка");
                 img.setAttribute('src', val['PhotoUrl']);
-                img.style.width = '140px';
-                img.style.height = '140px';
+//                img.style.width = '140px';
+//                img.style.height = '140px';
 
                 var h2 = document.createElement('h2');
                 h2.innerText = val['Name'];
 
                 var p = document.createElement('p');
                 p.innerText = val['Preview'];
+
+                var p2 = document.createElement('p');
+                p2.innerText = "";
+                var span = document.createElement('span');
+                span.classList.add("navbar-left");
+                span.classList.add("glyphicon");
+                span.classList.add("glyphicon-heart");
+                p2.appendChild(span);
+                var span2 = document.createElement('span');
+                span2.classList.add("navbar-left");
+                span2.innerText = " $5 ";
+                p2.appendChild(span2);
+                var span1 = document.createElement('span');
+                span1.classList.add("navbar-right");
+                span1.classList.add("glyphicon");
+//                span1.classList.add("glyphicon-star"); // избранное
+                span1.classList.add("glyphicon-star-empty"); // не избранное
+                p2.appendChild(span1);
+
+                var br = document.createElement('br');
+
                 var a = document.createElement('a');
                 a.classList.add('btn');
                 a.classList.add('btn-default');
                 a.setAttribute('href', 'Recipe/' + val['Id']);
                 a.setAttribute('role', 'button');
                 a.innerText = 'Подробнее >>';
-                p.appendChild(a);
+                var p1 = document.createElement('p');
+                p1.innerText = "";
+                p1.appendChild(a);
 
-                switch (i % 3) {
-                    case 1:
-                        {
-                            container1.appendChild(img);
-                            container1.appendChild(h2);
-                            container1.appendChild(p);
-                            break;
-                        }
-                    case 2:
-                        {
-                            container2.appendChild(img);
-                            container2.appendChild(h2);
-                            container2.appendChild(p);
-                            break;
-                        }
-                    case 0:
-                        {
-                            container3.appendChild(img);
-                            container3.appendChild(h2);
-                            container3.appendChild(p);
-                            break;
-                        }
+                container.appendChild(img);
+                container.appendChild(h2);
+                container.appendChild(p);
+                container.appendChild(p2);
+                container.appendChild(br);
+                container.appendChild(p1);
 
-                }
                 i++;
 
 
-
-        });
+            });
     }
 
     function sendTags() {
-        $.post('GetRecipies', $("#search").serialize(),
-            function (data) {
+        $.post('GetRecipies',
+            $("#search").serialize(),
+            function(data) {
                 console.log(data);
                 fill(data);
             });
@@ -103,68 +108,45 @@
                                         @{
                                             foreach (var tag in category.Tags)
                                             {
-
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox" value="@tag.Name" name="tags">@tag.Name</label>
+                                                    <label>
+                                                        <input type="checkbox" value="@tag.Name" name="tags">@tag.Name</label>
                                                 </div>
-
                                             }
                                         }
 
                                     </div>
                                 </div>
                             </div>
-
-                                            }
+                        }
                     }
                 </form>
             </div>
         </div>
 
-
-
-
-
         <div class="col-md-9">
-
 
             <form class="navbar-form">
                 <div class="btn-group input-group">
-                        <div class="form-group" styles="width:100%" >
-                            <input type="text" class="form-control" placeholder="Поиск">
-                        </div>
-                        <div class="form-group input-group-btn">
-                            <button class="btn btn-default" type="button" onclick="sendTags()">Поиск</button>
-                        </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Поиск">
+                    </div>
+                    <div class="form-group input-group-btn ">
+                        <button class="btn btn-default" type="button" onclick="sendTags()">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
                 </div>
             </form>
+            <br>
 
-            <div class="col-md-4">
-               <div id="listRecipies1">
-
-                 
-               </div>
-            </div>
-            <div class="col-md-4">
-                <div id="listRecipies2">
-
+            <div class="col-md-4 text-center">
+                <div id="listRecipies">
 
                 </div>
             </div>
-            <div class="col-md-4">
-                <div id="listRecipies3">
-
-
-                </div>
-            </div>
-
-          
-
 
         </div>
-
-
-
     </div>
 
 </div>
