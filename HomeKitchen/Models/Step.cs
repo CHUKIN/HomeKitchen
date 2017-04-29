@@ -12,6 +12,6 @@ namespace HomeKitchen.Models
         public string PhotoUrl { get; set; }
 
         public int ReceipeId { get; set; }
-        public Recipe Receipe { get; set; }
+        public virtual Recipe Receipe { get; set; }
     }
 }

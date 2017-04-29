@@ -15,12 +15,12 @@ namespace HomeKitchen.Models
         public DateTime DateOfCreation { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
-        public ICollection<Step> Steps { get; set; }
-        public  ICollection<TagRecipe> Tags { get; set; }
-        public  ICollection<RecipeIngredient> RecipeIngredient { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Step> Steps { get; set; }
+        public virtual ICollection<TagRecipe> Tags { get; set; }
+        public virtual ICollection<RecipeIngredient> RecipeIngredient { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
         public Recipe()
         {

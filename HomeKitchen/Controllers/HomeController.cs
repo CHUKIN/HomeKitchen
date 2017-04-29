@@ -24,7 +24,6 @@ namespace HomeKitchen.Controllers
 
         public ActionResult Account()
         {
-            //return View(db.Users.Include(i=>i.UserProfile).FirstOrDefault(i=>i.Id==id));
             return View();
         }
 
@@ -35,27 +34,8 @@ namespace HomeKitchen.Controllers
 
         public ActionResult Recipe(int id)
         {
-            Recipe recipe = new Recipe();
-            var rec = db.Recipies.Find(id);
-            recipe.Name = rec.Name;
-            recipe.Id = rec.Id;
-            recipe.CookingTime = rec.CookingTime;
-            recipe.DateOfCreation = rec.DateOfCreation;
-            recipe.PhotoUrl = rec.PhotoUrl;
-            recipe.Preview = rec.Preview;
-            recipe.User = new User();
-            User us = db.Users.Find(rec.UserId);
-            recipe.User.Login = us.Login;
-
-            var ingredients = db.RecipeIngredients.Where(i=>i.ReceipeId==rec.Id).ToList();
-            for(int i=0;i<ingredients.Count();i++)
-            {
-                ingredients[i].Ingredient = db.Ingredients.Find(ingredients[i].IngredientId);
-                ingredients[i].Measure = db.Measuries.Find(ingredients[i].MeasureId);
-            }
-            recipe.RecipeIngredient = ingredients;
-            // return Json(recipe,JsonRequestBehavior.AllowGet);
-            return View(recipe);
+ 
+            return View(db.Recipies.Find(id));
         }
 
         public ActionResult Favorites()
@@ -86,6 +66,7 @@ namespace HomeKitchen.Controllers
             return View();
         }
 
+       
 
 
 

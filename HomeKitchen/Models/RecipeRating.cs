@@ -12,12 +12,12 @@ namespace HomeKitchen.Models
         [Key]
         [ForeignKey("User"), Column(Order = 0)]
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         [Key]
         [ForeignKey("Recipe"), Column(Order = 1)]
         public int ReceipeId { get; set; }
-        public Recipe Recipe { get; set; }
+        public virtual Recipe Recipe { get; set; }
 
         public int Rating { get; set; }
     }

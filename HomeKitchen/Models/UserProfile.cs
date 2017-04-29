@@ -19,6 +19,6 @@ namespace HomeKitchen.Models
         public string PhotoUrl { get; set; }
         public DateTime DateOfBirth { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

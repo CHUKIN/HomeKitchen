@@ -15,13 +15,13 @@ namespace HomeKitchen.Models
         public bool Locked { get; set; }
 
         public int RoleId { get; set; }
-        public Role Role { get; set; }
+        public virtual Role Role { get; set; }
 
-        public UserProfile UserProfile { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
-        public ICollection<Recipe> Recipies { get; set; }
+        public virtual ICollection<Recipe> Recipies { get; set; }
 
         public User()
         {

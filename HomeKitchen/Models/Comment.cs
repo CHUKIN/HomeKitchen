@@ -11,10 +11,10 @@ namespace HomeKitchen.Models
         public string Text { get; set; }
 
         public int ReceipeId { get; set; }
-        public Recipe Receipe { get; set; }
+        public virtual Recipe Receipe { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         public DateTime Date { get; set; }
 

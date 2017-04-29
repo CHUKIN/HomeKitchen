@@ -15,15 +15,15 @@ namespace HomeKitchen.Models
         [Key]
         [ForeignKey("Ingredient"), Column(Order = 0)]
         public int IngredientId { get; set; }
-        public  Ingredient Ingredient { get; set; }
+        public virtual Ingredient Ingredient { get; set; }
 
         [Key]
         [ForeignKey("Recipe"), Column(Order = 1)]
         public int ReceipeId { get; set; }
-        public Recipe Recipe { get; set; }
+        public virtual Recipe Recipe { get; set; }
 
         public int MeasureId { get; set; }
-        public Measure Measure { get; set; }
+        public virtual Measure Measure { get; set; }
 
         public double Amount { get; set; }
     }
