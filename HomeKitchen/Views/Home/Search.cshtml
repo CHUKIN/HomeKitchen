@@ -18,7 +18,15 @@
 
         var i = 0;
         $.each(data,
-            function(key, val) {
+            function (key, val) {
+
+               
+
+                var div = document.createElement('div');
+                div.classList.add('col-md-4');
+                div.classList.add('text-center');
+
+
                 var img = document.createElement('img');
                 img.classList.add("img-rounded");
                 img.classList.add("img-responsive");
@@ -42,13 +50,18 @@
                 p2.appendChild(span);
                 var span2 = document.createElement('span');
                 span2.classList.add("navbar-left");
-                span2.innerText = " $5 ";
+                span2.innerText = val['Likes'];
                 p2.appendChild(span2);
                 var span1 = document.createElement('span');
                 span1.classList.add("navbar-right");
                 span1.classList.add("glyphicon");
-//                span1.classList.add("glyphicon-star"); // избранное
-                span1.classList.add("glyphicon-star-empty"); // не избранное
+                if (val['Favourite'] === true) {
+                    span1.classList.add("glyphicon-star"); // избранное
+                }
+                else {
+                    span1.classList.add("glyphicon-star-empty"); // не избранное
+                }
+               
                 p2.appendChild(span1);
 
                 var br = document.createElement('br');
@@ -63,13 +76,15 @@
                 p1.innerText = "";
                 p1.appendChild(a);
 
-                container.appendChild(img);
-                container.appendChild(h2);
-                container.appendChild(p);
-                container.appendChild(p2);
-                container.appendChild(br);
-                container.appendChild(p1);
+                div.appendChild(img);
+                div.appendChild(h2);
+                div.appendChild(p);
+                div.appendChild(p2);
+                div.appendChild(br);
+                div.appendChild(p1);
 
+
+                container.appendChild(div);
                 i++;
 
 
@@ -80,7 +95,6 @@
         $.post('GetRecipies',
             $("#search").serialize(),
             function(data) {
-                console.log(data);
                 fill(data);
             });
     }
@@ -93,6 +107,17 @@
         <div class="col-md-3">
             <div class="panel-group" id="accordion">
                 <form name="search" id="search">
+
+
+                        <div class="btn-group input-group">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Поиск" name="searchText" oninput="sendTags()">
+                            </div>
+                           
+                        </div>
+                    
+                    <br>
+
                     @{
 
                         foreach (var category in Model)
@@ -110,7 +135,7 @@
                                             {
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" value="@tag.Name" name="tags">@tag.Name</label>
+                                                        <input type="checkbox" value="@tag.Name" name="tags" onchange="sendTags()">@tag.Name</label>
                                                 </div>
                                             }
                                         }
@@ -124,29 +149,13 @@
             </div>
         </div>
 
-        <div class="col-md-9">
-
-            <form class="navbar-form">
-                <div class="btn-group input-group">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Поиск">
-                    </div>
-                    <div class="form-group input-group-btn ">
-                        <button class="btn btn-default" type="button" onclick="sendTags()">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <br>
-
-            <div class="col-md-4 text-center">
+       
+           
                 <div id="listRecipies">
 
                 </div>
-            </div>
-
-        </div>
+       
+       
     </div>
 
 </div>

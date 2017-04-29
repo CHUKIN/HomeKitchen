@@ -56,20 +56,20 @@
                                             <li>@Html.ActionLink("Избранное", "Favorites", "Home")</li>
                                         </ul>
                                     </div>
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-success ">Выйти</button>
-                                    </div>
+                                        <div class="form-group">
+                                            <a type="button" class="btn btn-success " href="/Account/LogOff">Выйти</a>
+                                        </div>
                                 </div>
                             </form>
                         }
                         else
                         {
-                            <form class="nav navbar-nav navbar-right navbar-form">
+                            <form class="nav navbar-nav navbar-right navbar-form" method="post", action="/Account/Login">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Логин" class="form-control">
+                                    <input type="text" placeholder="Логин" class="form-control" name="login">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Пароль" class="form-control">
+                                    <input type="password" placeholder="Пароль" class="form-control" name="password">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success ">Войти</button>

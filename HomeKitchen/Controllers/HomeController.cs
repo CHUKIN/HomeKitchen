@@ -14,7 +14,7 @@ namespace HomeKitchen.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(db);
         }
 
         public ActionResult Search()
@@ -44,27 +44,27 @@ namespace HomeKitchen.Controllers
 
         public ActionResult Favorites()
         {
-            return View();
+            return View(db.Users.FirstOrDefault(i => i.Login == User.Identity.Name));
         }
 
         public ActionResult MyRecipies()
         {
-            return View();
+            return View(db.Users.FirstOrDefault(i=>i.Login==User.Identity.Name));
         }
 
         public ActionResult GetRecipies()
         {
-            List<Recipe> listRecipe = new List<Recipe>();
+            List<RecipeAjax> listRecipe = new List<RecipeAjax>();
             foreach(var recipe in db.Recipies)
             {
-                var newRecipe = new Recipe()
+                var newRecipe = new RecipeAjax()
                 {
                     Id = recipe.Id,
-                    Name=recipe.Name,
-                    Preview=recipe.Preview,
-                    PhotoUrl=recipe.PhotoUrl,
-                    CookingTime=recipe.CookingTime,
-                    DateOfCreation=recipe.DateOfCreation                  
+                    Name = recipe.Name,
+                    PhotoUrl = recipe.PhotoUrl,
+                    Preview = recipe.Preview,
+                    Favourite = recipe.FavouriteRecipe.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null ? true : false,
+                    Likes = recipe.RecipeRating.Sum(i=>i.Rating)
                 };
 
                 listRecipe.Add(newRecipe);
@@ -73,11 +73,67 @@ namespace HomeKitchen.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetRecipies(string[] tags)
+        public ActionResult GetRecipies(string[] tags,string searchText)
         {
+            ICollection<RecipeAjax> resultRecipe = new List<RecipeAjax>();
+            if (tags != null)
+            {
+                ICollection<string> recipeTags = new List<string>();
 
+               
+                foreach (var recipe in db.Recipies)
+                {
+                    recipeTags.Clear();
+                    foreach (var tag in recipe.Tags)
+                    {
+                        recipeTags.Add(tag.Tag.Name);
+                    }
+                    int count = recipeTags.Intersect(tags).Count();
+                    string search = searchText ?? "";
+                    if (count==tags.Length&&recipe.Name.Contains(search))
+                    {
+
+                            resultRecipe.Add(new RecipeAjax()
+                            {
+                                Id = recipe.Id,
+                                Name = recipe.Name,
+                                PhotoUrl = recipe.PhotoUrl,
+                                Preview = recipe.Preview,
+                                Favourite = recipe.FavouriteRecipe.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null ? true : false,
+                                Likes = recipe.RecipeRating.Sum(i => i.Rating)
+                            });     
+                    }
+
+                }
+                return Json(resultRecipe, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                if (searchText != null)
+                {
+                    foreach(var recipe in db.Recipies)
+                    {
+                        if(recipe.Name.Contains(searchText))
+                        {
+                            resultRecipe.Add(new RecipeAjax()
+                            {
+                                Id = recipe.Id,
+                                Name = recipe.Name,
+                                PhotoUrl = recipe.PhotoUrl,
+                                Preview = recipe.Preview
+                            });
+                        }
+                    }
+                    return Json(resultRecipe, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+
+                    return RedirectToAction("GetRecipies");
+                }
+            }
            
-            return Json(db.Recipies,JsonRequestBehavior.AllowGet);
+            
         }
 
         public ActionResult NewRecipe()
@@ -85,7 +141,20 @@ namespace HomeKitchen.Controllers
             return View();
         }
 
-       
+        [HttpPost]
+        public ActionResult SendMessage(int idRecipe, string text)
+        {
+            var recipe = db.Recipies.Find(idRecipe);
+            var user = db.Users.FirstOrDefault(i=>i.Login==User.Identity.Name);
+            recipe.Comments.Add(new Comment(){
+                Receipe=recipe,
+                Text=text,
+                Date=DateTime.Now,
+                User=user
+            });
+            db.SaveChanges();
+            return RedirectToAction("Recipe/"+idRecipe);
+        }
 
 
 

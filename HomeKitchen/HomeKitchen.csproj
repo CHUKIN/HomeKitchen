@@ -184,6 +184,7 @@
     <Compile Include="Models\RecipeIngredient.cs" />
     <Compile Include="Models\RecipeRating.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\RecipeAjax.cs" />
     <Compile Include="Models\Step.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TagRecipe.cs" />

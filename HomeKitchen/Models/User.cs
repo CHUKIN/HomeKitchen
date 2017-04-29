@@ -23,10 +23,13 @@ namespace HomeKitchen.Models
 
         public virtual ICollection<Recipe> Recipies { get; set; }
 
+        public virtual ICollection<FavouriteRecipe> FavouriteRecipe { get; set; }
+
         public User()
         {
             Comments = new List<Comment>();
             Recipies = new List<Recipe>();
+            FavouriteRecipe = new List<FavouriteRecipe>();
         }
     }
 }
