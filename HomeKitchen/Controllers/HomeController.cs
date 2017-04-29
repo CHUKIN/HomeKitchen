@@ -158,7 +158,24 @@ namespace HomeKitchen.Controllers
 
         public ActionResult SwitchFavourite(int id)
         {
-            return Json(id,JsonRequestBehavior.AllowGet);
+            bool result=true;
+            var recipeRating = db.RecipeRatings.FirstOrDefault(i => i.User.Login == User.Identity.Name && i.Recipe.Id == id);
+            if (recipeRating==null)
+            {
+                db.RecipeRatings.Add(new RecipeRating()
+                {  User=db.Users.FirstOrDefault(i=>i.Login==User.Identity.Name),
+                 Recipe=db.Recipies.Find(id),
+                 Rating=1}
+                );
+                result = true;
+            }
+            else
+            {
+                db.RecipeRatings.Remove(recipeRating);
+                result = false;
+            }
+            db.SaveChanges();
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
 
 
