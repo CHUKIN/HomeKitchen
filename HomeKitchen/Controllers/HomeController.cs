@@ -75,19 +75,40 @@ namespace HomeKitchen.Controllers
         [HttpPost]
         public ActionResult GetRecipies(string[] tags)
         {
-            ICollection<Tag> inputTags = new List<Tag>();
-            foreach(var tag in tags)
-            {
-                inputTags.Add(db.Tags.FirstOrDefault(i=>i.Name==tag));
-            }
-
             ICollection<Recipe> resultRecipe = new List<Recipe>();
-            foreach(var recipe in db.Recipies)
+            if (tags != null)
             {
-                if (recipe.Tags.Intersect(inputTags)
+                ICollection<string> recipeTags = new List<string>();
+
+               
+                foreach (var recipe in db.Recipies)
+                {
+                    recipeTags.Clear();
+                    foreach (var tag in recipe.Tags)
+                    {
+                        recipeTags.Add(tag.Tag.Name);
+                    }
+                    int count = recipeTags.Intersect(tags).Count();
+                    if (count == recipe.Tags.Count()&&count==tags.Length)
+                    {
+                        resultRecipe.Add(new Recipe()
+                        {
+                            Id = recipe.Id,
+                            Name = recipe.Name,
+                            PhotoUrl = recipe.PhotoUrl,
+                            Preview = recipe.Preview
+                        });
+                    }
+
+                }
+                return Json(resultRecipe, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return RedirectToAction("GetRecipies");
             }
            
-            return Json(db.Recipies,JsonRequestBehavior.AllowGet);
+            
         }
 
         public ActionResult NewRecipe()

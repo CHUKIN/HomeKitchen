@@ -80,7 +80,6 @@
         $.post('GetRecipies',
             $("#search").serialize(),
             function(data) {
-                console.log(data);
                 fill(data);
             });
     }
