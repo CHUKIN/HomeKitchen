@@ -2,7 +2,15 @@
 @{
     ViewBag.Title = Model.Name;
 }
-
+<script>
+    function switchFavourite() {
+        $.getJSON('/Home/SwitchFavourite/@Model.Id',
+            function (data) {
+                console.log(data);
+            });
+       
+    }
+</script>
 
 <div class="container">
     <div class="row">
@@ -28,8 +36,8 @@
                         <a class="col-md-4" href="~/Home/Account/@Model.User.Id">@Model.User.Login</a>
                     </div>
                 </div>
-                <form class="form-horizontal">
-                    <button class="btn btn-default col-md-1" type="submit">
+                
+                    <button class="btn btn-default col-md-1" type="submit" id="buttonFavourite" onclick="switchFavourite()">
                         @{
                             if (Model.RecipeRating.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
                             {
@@ -40,13 +48,14 @@
                                 <span class="glyphicon glyphicon-heart-empty"></span>
                             }
                         }
-                        
+
                     </button>
                     <h4 class="col-md-1">@Model.RecipeRating.Sum(i => i.Rating)</h4>
-
+               
+                
                     <div class="col-md-1"></div>
 
-                    <button class="btn btn-default col-md-1" type="submit">
+                    <button class="btn btn-default col-md-1" type="submit" id="buttonLikes">
                         @{
                             if (Model.FavouriteRecipe.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
                             {
@@ -58,11 +67,11 @@
                             }
                         }
 
-                       
+
                     </button>
                     <h5 class="col-md-1">Избранное</h5>
-
-                </form>
+                
+                
             </div>
 
         </div>
