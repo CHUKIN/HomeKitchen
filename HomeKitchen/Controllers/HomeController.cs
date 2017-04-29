@@ -156,6 +156,11 @@ namespace HomeKitchen.Controllers
             return RedirectToAction("Recipe/"+idRecipe);
         }
 
+        public ActionResult SwitchFavourite(int id)
+        {
+            return Json(id,JsonRequestBehavior.AllowGet);
+        }
+
 
 
 
