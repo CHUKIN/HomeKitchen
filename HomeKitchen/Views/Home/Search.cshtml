@@ -18,7 +18,15 @@
 
         var i = 0;
         $.each(data,
-            function(key, val) {
+            function (key, val) {
+
+               
+
+                var div = document.createElement('div');
+                div.classList.add('col-md-4');
+                div.classList.add('text-center');
+
+
                 var img = document.createElement('img');
                 img.classList.add("img-rounded");
                 img.classList.add("img-responsive");
@@ -63,13 +71,15 @@
                 p1.innerText = "";
                 p1.appendChild(a);
 
-                container.appendChild(img);
-                container.appendChild(h2);
-                container.appendChild(p);
-                container.appendChild(p2);
-                container.appendChild(br);
-                container.appendChild(p1);
+                div.appendChild(img);
+                div.appendChild(h2);
+                div.appendChild(p);
+                div.appendChild(p2);
+                div.appendChild(br);
+                div.appendChild(p1);
 
+
+                container.appendChild(div);
                 i++;
 
 
@@ -134,17 +144,13 @@
             </div>
         </div>
 
-        <div class="col-md-9">
-
+       
            
-
-            <div class="col-md-4 text-center">
                 <div id="listRecipies">
 
                 </div>
-            </div>
-
-        </div>
+       
+       
     </div>
 
 </div>

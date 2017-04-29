@@ -44,7 +44,7 @@ namespace HomeKitchen.Controllers
 
         public ActionResult Favorites()
         {
-            return View();
+            return View(db.Users.FirstOrDefault(i => i.Login == User.Identity.Name));
         }
 
         public ActionResult MyRecipies()
@@ -139,7 +139,20 @@ namespace HomeKitchen.Controllers
             return View();
         }
 
-       
+        [HttpPost]
+        public ActionResult SendMessage(int idRecipe, string text)
+        {
+            var recipe = db.Recipies.Find(idRecipe);
+            var user = db.Users.FirstOrDefault(i=>i.Login==User.Identity.Name);
+            recipe.Comments.Add(new Comment(){
+                Receipe=recipe,
+                Text=text,
+                Date=DateTime.Now,
+                User=user
+            });
+            db.SaveChanges();
+            return RedirectToAction("Recipe/"+idRecipe);
+        }
 
 
 

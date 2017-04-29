@@ -123,7 +123,7 @@
             <h4 class="text-center">Комментарии</h4><br>
             <div class="form-horizontal">
 
-                <form class="form-group">
+                <form class="form-group" method="post" action="/Home/SendMessage" >
                     <div class="col-md-1">
                         <img class="img-circle img-responsive" alt="Фото" styles="height:50px, width:50px" src="@Model.User.UserProfile.PhotoUrl">
                     </div>
@@ -131,14 +131,14 @@
                         <label class="col-md-2">@User.Identity.Name</label>
                     </div>
                     <div class="col-md-11">
-                        <textarea class="form-control" placeholder="Введите комментарий..." rows="3"></textarea>
-                        <button class="btn btn-default " type="submit">Отправить</button>
+                        <textarea class="form-control" placeholder="Введите комментарий..." rows="3" name="text"></textarea>
+                        <button class="btn btn-default " type="submit" name="idRecipe" value="@Model.Id">Отправить</button>
                     </div>
                 </form>
 
                 <br>
                 @{
-                    foreach (var comment in Model.Comments)
+                    foreach (var comment in Model.Comments.OrderByDescending(i=>i.Date))
                     {
                         <div class="form-group">
                             <div class="col-md-1">
