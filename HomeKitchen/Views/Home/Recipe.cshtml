@@ -7,7 +7,7 @@
         $.getJSON('/Home/SwitchFavourite/@Model.Id',
             function (data) {
                 var buttonFav = document.getElementById('buttonFavourite');
-                
+
                 if (data === true) {
                     buttonFav.innerHTML = `<span class="glyphicon glyphicon-star"></span>`;
                 }
@@ -15,7 +15,35 @@
                     buttonFav.innerHTML = `<span class="glyphicon glyphicon-star-empty"></span>`;
                 }
             });
-       
+
+    }
+
+     function switchLikes() {
+        $.getJSON('/Home/SwitchLikes/@Model.Id',
+            function (data) {
+                var buttonFav = document.getElementById('buttonLikes');
+
+                if (data === true) {
+                    buttonFav.innerHTML = `<span class="glyphicon glyphicon-heart"></span>`;
+                }
+                else {
+                    buttonFav.innerHTML = `<span class="glyphicon glyphicon-heart-empty"></span>`;
+                }
+
+
+
+                 $.getJSON('/Home/Likes/@Model.Id',
+            function (data) {
+                var buttonFav = document.getElementById('likes');
+                buttonFav.innerHTML = data;
+                
+            });
+
+
+
+
+            });
+
     }
 </script>
 
@@ -44,7 +72,7 @@
                     </div>
                 </div>
                 
-                    <button class="btn btn-default col-md-1" type="submit" id="buttonLikes" >
+                    <button class="btn btn-default col-md-1" type="submit" id="buttonLikes"  onclick="switchLikes()" >
                         @{
                             if (Model.RecipeRating.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
                             {
@@ -57,7 +85,7 @@
                         }
 
                     </button>
-                    <h4 class="col-md-1">@Model.RecipeRating.Sum(i => i.Rating)</h4>
+                    <h4 class="col-md-1" id="likes">@Model.RecipeRating.Sum(i => i.Rating)</h4>
                
                 
                     <div class="col-md-1"></div>

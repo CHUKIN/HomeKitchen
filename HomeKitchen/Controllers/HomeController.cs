@@ -177,6 +177,37 @@ namespace HomeKitchen.Controllers
             return Json(result,JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult SwitchLikes(int id)
+        {
+            bool result = true;
+            var recipeRating = db.RecipeRatings.FirstOrDefault(i => i.User.Login == User.Identity.Name && i.Recipe.Id == id);
+            if (recipeRating == null)
+            {
+                db.RecipeRatings.Add(new RecipeRating()
+                {
+                    User = db.Users.FirstOrDefault(i => i.Login == User.Identity.Name),
+                    Recipe = db.Recipies.Find(id),
+                    Rating=1
+                }
+                );
+                result = true;
+            }
+            else
+            {
+                db.RecipeRatings.Remove(recipeRating);
+                result = false;
+            }
+            db.SaveChanges();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Likes(int id)
+        {
+            int result = db.Recipies.Find(id).RecipeRating.Sum(i=>i.Rating);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
 
 
