@@ -73,7 +73,7 @@ namespace HomeKitchen.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetRecipies(string[] tags)
+        public ActionResult GetRecipies(string[] tags,string searchText)
         {
             ICollection<Recipe> resultRecipe = new List<Recipe>();
             if (tags != null)
@@ -89,15 +89,17 @@ namespace HomeKitchen.Controllers
                         recipeTags.Add(tag.Tag.Name);
                     }
                     int count = recipeTags.Intersect(tags).Count();
-                    if (count == recipe.Tags.Count()&&count==tags.Length)
+                    string search = searchText ?? "";
+                    if (count==tags.Length&&recipe.Name.Contains(search))
                     {
-                        resultRecipe.Add(new Recipe()
-                        {
-                            Id = recipe.Id,
-                            Name = recipe.Name,
-                            PhotoUrl = recipe.PhotoUrl,
-                            Preview = recipe.Preview
-                        });
+
+                            resultRecipe.Add(new Recipe()
+                            {
+                                Id = recipe.Id,
+                                Name = recipe.Name,
+                                PhotoUrl = recipe.PhotoUrl,
+                                Preview = recipe.Preview
+                            });     
                     }
 
                 }
@@ -105,7 +107,28 @@ namespace HomeKitchen.Controllers
             }
             else
             {
-                return RedirectToAction("GetRecipies");
+                if (searchText != null)
+                {
+                    foreach(var recipe in db.Recipies)
+                    {
+                        if(recipe.Name.Contains(searchText))
+                        {
+                            resultRecipe.Add(new Recipe()
+                            {
+                                Id = recipe.Id,
+                                Name = recipe.Name,
+                                PhotoUrl = recipe.PhotoUrl,
+                                Preview = recipe.Preview
+                            });
+                        }
+                    }
+                    return Json(resultRecipe, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+
+                    return RedirectToAction("GetRecipies");
+                }
             }
            
             
