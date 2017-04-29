@@ -22,7 +22,7 @@
                         <h3>@recipe.Name</h3>
                         <p>@recipe.Preview</p>
                         <p><span class="glyphicon glyphicon-heart"></span> @recipe.RecipeRating.Sum(i => i.Rating)</p>
-                        <p><a class="btn btn-default" href="Home/Recipe/@recipe.Id" role="button">Подробнее »</a></p>
+                        <p><a class="btn btn-default" href="/Home/Recipe/@recipe.Id" role="button">Подробнее »</a></p>
                     </div>
                 }
             }
