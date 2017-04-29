@@ -19,17 +19,21 @@ namespace HomeKitchen.Controllers
 
         public ActionResult Search()
         {
-            return View(db.Categorys.Include(i=>i.Tags));
+            return View(db.Categorys);
         }
 
-        public ActionResult Account()
+        public ActionResult Account(int? id)
         {
-            return View();
+            if(id==null)
+            {
+                id = db.Users.FirstOrDefault(i=>i.Login==User.Identity.Name).Id;
+            }
+            return View(db.Users.Find(id));
         }
 
         public ActionResult MyAccount()
         {
-            return View();
+            return View(db.Users.FirstOrDefault(i=>i.Login==User.Identity.Name));
         }
 
         public ActionResult Recipe(int id)
@@ -50,7 +54,22 @@ namespace HomeKitchen.Controllers
 
         public ActionResult GetRecipies()
         {
-            return Json(db.Recipies,JsonRequestBehavior.AllowGet);
+            List<Recipe> listRecipe = new List<Recipe>();
+            foreach(var recipe in db.Recipies)
+            {
+                var newRecipe = new Recipe()
+                {
+                    Id = recipe.Id,
+                    Name=recipe.Name,
+                    Preview=recipe.Preview,
+                    PhotoUrl=recipe.PhotoUrl,
+                    CookingTime=recipe.CookingTime,
+                    DateOfCreation=recipe.DateOfCreation                  
+                };
+
+                listRecipe.Add(newRecipe);
+            }
+            return Json(listRecipe,JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

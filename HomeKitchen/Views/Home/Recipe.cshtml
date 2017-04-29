@@ -25,7 +25,7 @@
                         <label class="col-md-1">Дата:</label>
                         <p class="col-md-4">@Model.DateOfCreation</p>
                         <label class="col-md-1">Автор:</label>
-                        <a class="col-md-4" href="Account.cshtml">@Model.User.Login</a>
+                        <a class="col-md-4" href="~/Home/Account/@Model.User.Id">@Model.User.Login</a>
                     </div>
                 </div>
                 <form class="form-horizontal">
@@ -89,18 +89,19 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <ol>
-                    <li>
-                        <p>Чистим картошку</p>
-                        <br>
-                        <img class="img-rounded img-responsive" alt="Фото" src="http://fb.ru/misc/i/gallery/38228/1412636.jpg">
-                        <br>
-                    </li>
-                    <li>
-                        <p>Нарезаем овощи</p>
-                        <br>
-                        <img class="img-rounded img-responsive" alt="Фото" src="http://www.mhealth.ru/upload/iblock/ac1/ac1df981b21a93f9773901221c6409bc.jpg">
-                        <br>
-                    </li>
+                    @{
+                        foreach (var step in Model.Steps)
+                        {
+                            <li>
+                                <p>@step.Text</p>
+                                <br>
+                                <img class="img-rounded img-responsive" alt="Фото" src="@step.PhotoUrl">
+                                <br>
+                            </li>
+                        }
+                    }
+                    
+                   
                 </ol>
             </div>
             <div class="col-md-3"></div>

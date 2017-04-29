@@ -2,21 +2,26 @@
 @{
     ViewBag.Title = "Профиль";
 }
-
+@model HomeKitchen.Models.User
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <h2 class="text-center">Профиль</h2><br>
             <div class="col-md-3">
-                <img class="img-circle img-responsive" alt="Фото" src="https://files5.adme.ru/files/news/part_119/1193760/6844760-3-650-a542d8629a-1484643195.jpg" styles="height:200px; width:200px">
+                <img class="img-circle img-responsive" alt="Фото" src="@Model.UserProfile.PhotoUrl" styles="height:200px; width:200px">
                 <br>
-
-                <form role="form">
-                    <div class="form-group">
-                        <a class="btn btn-default form-control" href="MyAccount">Редактировать</a>
-                    </div>
-                </form>
+                @{
+                    if (User.Identity.Name == Model.Login)
+                    {
+                        <form role="form">
+                            <div class="form-group">
+                                <a class="btn btn-default form-control" href="MyAccount">Редактировать</a>
+                            </div>
+                        </form>
+                    }
+                }
+               
 
                 <p>@Html.ActionLink("Мои рецепты", "MyRecipies", "Home")</p>
                 <p>@Html.ActionLink("Избранное", "Favorites", "Home")</p>
@@ -31,14 +36,14 @@
                         <div class="form-group">
                             <div class="col-md-2"></div>
                             <label class="col-md-3">Логин</label>
-                            <p class="col-md-6">Какой-то логин</p>
+                            <p class="col-md-6">@Model.Login</p>
                             <div class="col-md-1"></div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-2"></div>
                             <label class="col-md-3">Email</label>
-                                <p class="col-md-6">hahah@gmail.com</p>
+                                <p class="col-md-6">@Model.Email</p>
                                 <div class="col-md-1"></div>
 
 
@@ -47,7 +52,7 @@
                         <div class="form-group">
                             <div class="col-md-2"></div>
                             <label class="col-md-3">Дата регистрации</label>
-                            <p class="col-md-6">@DateTime.Now.Date</p>
+                            <p class="col-md-6">@Model.DateOfRegistration</p>
                             <div class="col-md-1"></div>
                         </div>
 
@@ -57,7 +62,7 @@
                             <div class="col-md-2"></div>
                             <label class="col-md-3">Имя</label>
 
-                                <p class="col-md-6">Катя</p>
+                                <p class="col-md-6">@Model.UserProfile.Name</p>
                                 <div class="col-md-1"></div>
 
 
@@ -66,17 +71,17 @@
                             <div class="col-md-2"></div>
                             <label class="col-md-3">Пол</label>
 
-                                <p class="col-md-6">Женский</p>
+                                <p class="col-md-6">@Model.UserProfile.Gender</p>
                                 <div class="col-md-1"></div>
 
 
                         </div>
                         <div class="form-group">
                             <div class="col-md-2"></div>
-                            <label class="col-md-3">Возраст</label>
+                            <label class="col-md-3">Дата рождения</label>
 
 
-                                <p class="col-md-6">25</p>
+                                <p class="col-md-6">@Model.UserProfile.DateOfBirth</p>
                                 <div class="col-md-1"></div>
 
 
