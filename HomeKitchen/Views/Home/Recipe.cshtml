@@ -6,7 +6,14 @@
     function switchFavourite() {
         $.getJSON('/Home/SwitchFavourite/@Model.Id',
             function (data) {
-                console.log(data);
+                var buttonFav = document.getElementById('buttonFavourite');
+                
+                if (data === true) {
+                    buttonFav.innerHTML = `<span class="glyphicon glyphicon-star"></span>`;
+                }
+                else {
+                    buttonFav.innerHTML = `<span class="glyphicon glyphicon-star-empty"></span>`;
+                }
             });
        
     }
@@ -37,7 +44,7 @@
                     </div>
                 </div>
                 
-                    <button class="btn btn-default col-md-1" type="submit" id="buttonFavourite" onclick="switchFavourite()">
+                    <button class="btn btn-default col-md-1" type="submit" id="buttonLikes" >
                         @{
                             if (Model.RecipeRating.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
                             {
@@ -55,7 +62,7 @@
                 
                     <div class="col-md-1"></div>
 
-                    <button class="btn btn-default col-md-1" type="submit" id="buttonLikes">
+                    <button class="btn btn-default col-md-1" type="submit" id="buttonFavourite" onclick="switchFavourite()">
                         @{
                             if (Model.FavouriteRecipe.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
                             {

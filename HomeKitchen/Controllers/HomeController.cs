@@ -159,19 +159,18 @@ namespace HomeKitchen.Controllers
         public ActionResult SwitchFavourite(int id)
         {
             bool result=true;
-            var recipeRating = db.RecipeRatings.FirstOrDefault(i => i.User.Login == User.Identity.Name && i.Recipe.Id == id);
-            if (recipeRating==null)
+            var recipeFavourite = db.FavouriteRecipies.FirstOrDefault(i => i.User.Login == User.Identity.Name && i.Recipe.Id == id);
+            if (recipeFavourite == null)
             {
-                db.RecipeRatings.Add(new RecipeRating()
+                db.FavouriteRecipies.Add(new FavouriteRecipe()
                 {  User=db.Users.FirstOrDefault(i=>i.Login==User.Identity.Name),
-                 Recipe=db.Recipies.Find(id),
-                 Rating=1}
+                 Recipe=db.Recipies.Find(id)}
                 );
                 result = true;
             }
             else
             {
-                db.RecipeRatings.Remove(recipeRating);
+                db.FavouriteRecipies.Remove(recipeFavourite);
                 result = false;
             }
             db.SaveChanges();
