@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Мои рецепты";
 }
+@model HomeKitchen.Models.User
 
 <div class="container">
     <div class="row">
@@ -14,13 +15,18 @@
             <br>
 
             @*по 4 в строке, можно просто последовательно добавлять для каждого*@
-            <div class="col-md-3 text-center">
-                <img class="img-rounded img-responsive" alt="Картинка" src="http://fb.ru/misc/i/gallery/38228/1412636.jpg" >
-                <h3>$Название</h3>
-                <p>$Краткое описание</p>
-                <p><span class="glyphicon glyphicon-heart"></span> $5</p>
-                <p><a class="btn btn-default" href="Recipe/5" role="button">Подробнее »</a></p>
-            </div>
+            @{
+                foreach (var recipe in Model.Recipies)
+                {
+                    <div class="col-md-3 text-center">
+                        <img class="img-rounded img-responsive" alt="Картинка" src="@recipe.PhotoUrl">
+                        <h3>@recipe.Name</h3>
+                        <p> @recipe.Preview</p>
+                        <p><span class="glyphicon glyphicon-heart"></span> $5</p>
+                        <p><a class="btn btn-default" href="Recipe/@recipe.Id" role="button">Подробнее »</a></p>
+                    </div>
+                }
+            }
 
 
         </div>

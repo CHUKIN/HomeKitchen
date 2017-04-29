@@ -14,7 +14,7 @@ namespace HomeKitchen.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(db);
         }
 
         public ActionResult Search()
@@ -49,7 +49,7 @@ namespace HomeKitchen.Controllers
 
         public ActionResult MyRecipies()
         {
-            return View();
+            return View(db.Users.FirstOrDefault(i=>i.Login==User.Identity.Name));
         }
 
         public ActionResult GetRecipies()
@@ -75,7 +75,17 @@ namespace HomeKitchen.Controllers
         [HttpPost]
         public ActionResult GetRecipies(string[] tags)
         {
+            ICollection<Tag> inputTags = new List<Tag>();
+            foreach(var tag in tags)
+            {
+                inputTags.Add(db.Tags.FirstOrDefault(i=>i.Name==tag));
+            }
 
+            ICollection<Recipe> resultRecipe = new List<Recipe>();
+            foreach(var recipe in db.Recipies)
+            {
+                if (recipe.Tags.Intersect(inputTags)
+            }
            
             return Json(db.Recipies,JsonRequestBehavior.AllowGet);
         }
