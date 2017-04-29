@@ -30,15 +30,35 @@
                 </div>
                 <form class="form-horizontal">
                     <button class="btn btn-default col-md-1" type="submit">
-                        <span class="glyphicon glyphicon-heart"></span>
+                        @{
+                            if (Model.RecipeRating.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
+                            {
+                                <span class="glyphicon glyphicon-heart"></span>
+                            }
+                            else
+                            {
+                                <span class="glyphicon glyphicon-heart-empty"></span>
+                            }
+                        }
+                        
                     </button>
-                    <h4 class="col-md-1">$5</h4>
+                    <h4 class="col-md-1">@Model.RecipeRating.Sum(i => i.Rating)</h4>
 
                     <div class="col-md-1"></div>
 
                     <button class="btn btn-default col-md-1" type="submit">
-@*                        <span class="glyphicon glyphicon-star"></span>*@
-                        <span class="glyphicon glyphicon-star-empty"></span>
+                        @{
+                            if (Model.FavouriteRecipe.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
+                            {
+                                <span class="glyphicon glyphicon-star"></span>
+                            }
+                            else
+                            {
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            }
+                        }
+
+                       
                     </button>
                     <h5 class="col-md-1">Избранное</h5>
 

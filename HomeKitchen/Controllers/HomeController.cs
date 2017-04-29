@@ -54,17 +54,17 @@ namespace HomeKitchen.Controllers
 
         public ActionResult GetRecipies()
         {
-            List<Recipe> listRecipe = new List<Recipe>();
+            List<RecipeAjax> listRecipe = new List<RecipeAjax>();
             foreach(var recipe in db.Recipies)
             {
-                var newRecipe = new Recipe()
+                var newRecipe = new RecipeAjax()
                 {
                     Id = recipe.Id,
-                    Name=recipe.Name,
-                    Preview=recipe.Preview,
-                    PhotoUrl=recipe.PhotoUrl,
-                    CookingTime=recipe.CookingTime,
-                    DateOfCreation=recipe.DateOfCreation                  
+                    Name = recipe.Name,
+                    PhotoUrl = recipe.PhotoUrl,
+                    Preview = recipe.Preview,
+                    Favourite = recipe.FavouriteRecipe.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null ? true : false,
+                    Likes = recipe.RecipeRating.Sum(i=>i.Rating)
                 };
 
                 listRecipe.Add(newRecipe);
@@ -75,7 +75,7 @@ namespace HomeKitchen.Controllers
         [HttpPost]
         public ActionResult GetRecipies(string[] tags,string searchText)
         {
-            ICollection<Recipe> resultRecipe = new List<Recipe>();
+            ICollection<RecipeAjax> resultRecipe = new List<RecipeAjax>();
             if (tags != null)
             {
                 ICollection<string> recipeTags = new List<string>();
@@ -93,12 +93,14 @@ namespace HomeKitchen.Controllers
                     if (count==tags.Length&&recipe.Name.Contains(search))
                     {
 
-                            resultRecipe.Add(new Recipe()
+                            resultRecipe.Add(new RecipeAjax()
                             {
                                 Id = recipe.Id,
                                 Name = recipe.Name,
                                 PhotoUrl = recipe.PhotoUrl,
-                                Preview = recipe.Preview
+                                Preview = recipe.Preview,
+                                Favourite = recipe.FavouriteRecipe.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null ? true : false,
+                                Likes = recipe.RecipeRating.Sum(i => i.Rating)
                             });     
                     }
 
@@ -113,7 +115,7 @@ namespace HomeKitchen.Controllers
                     {
                         if(recipe.Name.Contains(searchText))
                         {
-                            resultRecipe.Add(new Recipe()
+                            resultRecipe.Add(new RecipeAjax()
                             {
                                 Id = recipe.Id,
                                 Name = recipe.Name,

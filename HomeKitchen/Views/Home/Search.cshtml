@@ -50,13 +50,18 @@
                 p2.appendChild(span);
                 var span2 = document.createElement('span');
                 span2.classList.add("navbar-left");
-                span2.innerText = " $5 ";
+                span2.innerText = val['Likes'];
                 p2.appendChild(span2);
                 var span1 = document.createElement('span');
                 span1.classList.add("navbar-right");
                 span1.classList.add("glyphicon");
-//                span1.classList.add("glyphicon-star"); // избранное
-                span1.classList.add("glyphicon-star-empty"); // не избранное
+                if (val['Favourite'] === true) {
+                    span1.classList.add("glyphicon-star"); // избранное
+                }
+                else {
+                    span1.classList.add("glyphicon-star-empty"); // не избранное
+                }
+               
                 p2.appendChild(span1);
 
                 var br = document.createElement('br');

@@ -21,7 +21,7 @@
                         <img class="img-rounded img-responsive" alt="Картинка" src="@recipe.PhotoUrl">
                         <h3>@recipe.Name</h3>
                         <p>@recipe.Preview</p>
-                        <p><span class="glyphicon glyphicon-heart"></span> $5</p>
+                        <p><span class="glyphicon glyphicon-heart"></span> @recipe.RecipeRating.Sum(i => i.Rating)</p>
                         <p><a class="btn btn-default" href="Home/Recipe/@recipe.Id" role="button">Подробнее »</a></p>
                     </div>
                 }

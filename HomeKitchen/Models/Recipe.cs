@@ -21,6 +21,8 @@ namespace HomeKitchen.Models
         public virtual ICollection<TagRecipe> Tags { get; set; }
         public virtual ICollection<RecipeIngredient> RecipeIngredient { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<FavouriteRecipe> FavouriteRecipe { get; set; }
+        public virtual ICollection<RecipeRating> RecipeRating { get; set; }
 
         public Recipe()
         {
@@ -28,6 +30,8 @@ namespace HomeKitchen.Models
             Tags = new List<TagRecipe>();
             RecipeIngredient = new List<RecipeIngredient>();
             Comments =new List<Comment>();
+            FavouriteRecipe = new List<FavouriteRecipe>();
+            RecipeRating = new List<RecipeRating>();
         }
     }
 }
