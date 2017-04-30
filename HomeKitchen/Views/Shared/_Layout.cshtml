@@ -39,6 +39,19 @@
                         {
                             <li>@Html.ActionLink("Рецепты", "Search", "Home")</li>
                         }
+                    @{
+                        if (User.IsInRole("Admin"))
+                        {
+                            if (ViewBag.Title == "Меню администратора")
+                            {
+                                <li class="active">@Html.ActionLink("Меню администратора", "Index", "Admin")</li>
+                            }
+                            else
+                            {
+                                <li> @Html.ActionLink("Меню администратора", "Index", "Admin") </li>
+                            }
+                        }
+                    }
 
                     </ul>
                     @{
