@@ -5,8 +5,10 @@
 
 <script>
 
+    countIngredient = 1;
+
     function addIngredient() {
-        var txt = `<div class="form-horizontal">
+        var txt = `<div class="form-horizontal" class="ingredient" >
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control" placeholder="Название">
                             </div>
@@ -21,24 +23,42 @@
                                     <option>$ст</option>
                                 </select>
                             </div>
-                            <br><br><br>
+                            <div class="ingredient">
+                                <button class="btn btn-default" type="button" >
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                            <br>
                         </div>`;
         $("#ingredient").append(txt);
+
+
     }
 
+
     function addStep() {
-        var txt = `<div class="form-group">
-            <label>Шаг</label>
-            <textarea class="form-control" placeholder="Введите описание..." rows="3"></textarea>
-            <br>
-            <button class="btn btn-default">
-            Загрузить фото
-            <span class="glyphicon glyphicon-open"></span>
-            </button>
-            </div>`;
+        var txt = `<div class="form-group form-horizontal step">
+                        <hr>
+                        <div class="form-group">
+                            <h5 class="col-md-2">Шаг </h5>
+                            <div class="step">
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <textarea class="form-control " placeholder="Введите описание..." rows="3"></textarea>
+                        <br>
+                        <button class="btn btn-default">
+                            Загрузить фото
+                            <span class="glyphicon glyphicon-open"></span>
+                        </button>
+                    </div>`;
         $("#step").append(txt);
     }
 </script>
+
+
 
 <div class="container">
     <div class="row">
@@ -93,7 +113,7 @@
                 <div>
                     <label>Ингредиенты</label>
                     <div id="ingredient">
-                        <div class="form-horizontal">
+                        <div class="form-horizontal" class="ingredient" >
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control" placeholder="Название">
                             </div>
@@ -108,28 +128,39 @@
                                     <option>$ст</option>
                                 </select>
                             </div>
-                            <br><br><br>
+                            <div class="ingredient">
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                            <br>
                         </div>
                     </div>
-
                 </div>
                 <div>
-                    <button class="btn btn-success " type="button" onclick="addIngredient()">
+                    <button class="btn btn-success " type="button" onclick="addIngredient()" id="btnAddIngredient">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </div><br><br>
 
                 <label>Приготовление</label>
                 <div id = "step">
-                <div class="form-group">
-                    <label>Шаг</label>
-                    <textarea class="form-control" placeholder="Введите описание..." rows="3"></textarea>
-                    <br>
-                    <button class="btn btn-default">
-                        Загрузить фото
-                        <span class="glyphicon glyphicon-open"></span>
-                    </button>
-                </div>
+                    <div class="form-group form-horizontal step">
+                        <div class="form-group">
+                            <h5 class="col-md-2">Шаг </h5>
+                            <div class="step">
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <textarea class="form-control " placeholder="Введите описание..." rows="3"></textarea>
+                        <br>
+                        <button class="btn btn-default">
+                            Загрузить фото
+                            <span class="glyphicon glyphicon-open"></span>
+                        </button>
+                    </div>
                 </div>
                 <div>
                     <button class="btn btn-success " type="button" onclick="addStep()">
@@ -147,3 +178,16 @@
     </div>
 </div>
 
+<script>
+    ingredients = $('.ingredient');
+    ingredients.click(function() {
+        $(this).parent().remove();
+    });
+</script>
+
+<script>
+    steps = $('.step');
+    steps.click(function() {
+        $(this).parent().parent().remove();
+    });
+</script>
