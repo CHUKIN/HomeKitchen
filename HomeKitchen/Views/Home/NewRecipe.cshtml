@@ -8,7 +8,8 @@
     countIngredient = 1;
 
     function addIngredient() {
-        var txt = `<div class="form-horizontal" class="ingredient" >
+        
+        var txt = `<div class="form-horizontal"  >
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control" placeholder="Название">
                             </div>
@@ -32,6 +33,10 @@
                         </div>`;
         $("#ingredient").append(txt);
 
+        ingredients = $('.ingredient');
+        ingredients.click(function () {
+            $(this).parent().remove();
+        });
 
     }
 
@@ -55,6 +60,11 @@
                         </button>
                     </div>`;
         $("#step").append(txt);
+
+        steps = $('.step');
+        steps.click(function () {
+            $(this).parent().parent().remove();
+        });
     }
 </script>
 
@@ -113,7 +123,7 @@
                 <div>
                     <label>Ингредиенты</label>
                     <div id="ingredient">
-                        <div class="form-horizontal" class="ingredient" >
+                        <div class="form-horizontal"  >
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control" placeholder="Название">
                             </div>
@@ -180,7 +190,7 @@
 
 <script>
     ingredients = $('.ingredient');
-    ingredients.click(function() {
+    ingredients.click(function () {
         $(this).parent().remove();
     });
 </script>
