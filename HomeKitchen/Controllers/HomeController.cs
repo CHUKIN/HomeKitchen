@@ -159,13 +159,36 @@ namespace HomeKitchen.Controllers
         public ActionResult SwitchFavourite(int id)
         {
             bool result=true;
+            var recipeFavourite = db.FavouriteRecipies.FirstOrDefault(i => i.User.Login == User.Identity.Name && i.Recipe.Id == id);
+            if (recipeFavourite == null)
+            {
+                db.FavouriteRecipies.Add(new FavouriteRecipe()
+                {  User=db.Users.FirstOrDefault(i=>i.Login==User.Identity.Name),
+                 Recipe=db.Recipies.Find(id)}
+                );
+                result = true;
+            }
+            else
+            {
+                db.FavouriteRecipies.Remove(recipeFavourite);
+                result = false;
+            }
+            db.SaveChanges();
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult SwitchLikes(int id)
+        {
+            bool result = true;
             var recipeRating = db.RecipeRatings.FirstOrDefault(i => i.User.Login == User.Identity.Name && i.Recipe.Id == id);
-            if (recipeRating==null)
+            if (recipeRating == null)
             {
                 db.RecipeRatings.Add(new RecipeRating()
-                {  User=db.Users.FirstOrDefault(i=>i.Login==User.Identity.Name),
-                 Recipe=db.Recipies.Find(id),
-                 Rating=1}
+                {
+                    User = db.Users.FirstOrDefault(i => i.Login == User.Identity.Name),
+                    Recipe = db.Recipies.Find(id),
+                    Rating=1
+                }
                 );
                 result = true;
             }
@@ -175,7 +198,14 @@ namespace HomeKitchen.Controllers
                 result = false;
             }
             db.SaveChanges();
-            return Json(result,JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Likes(int id)
+        {
+            int result = db.Recipies.Find(id).RecipeRating.Sum(i=>i.Rating);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
 
