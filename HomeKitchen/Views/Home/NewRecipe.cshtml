@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Создание нового рецепта";
 }
-
+@model HomeKitchen.Models.KitchenContext
 <script>
 
     countIngredient = 1;
@@ -11,17 +11,20 @@
 
         var txt = `<div class="form-horizontal"  >
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control" placeholder="Название">
+                                <input type="text" class="form-control" placeholder="Название" name="nameIngredientRecipe">
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="number" class="form-control" placeholder="Количество">
+                                <input type="number" class="form-control" placeholder="Количество" name="countngredientRecipe">
                             </div>
                             <div class="form-group col-md-4">
-                                <select class="form-control">
+                                <select class="form-control" name="measureIdRecipe">
                                     <option disabled selected>Ед. измерения</option>
-                                    <option>$кг</option>
-                                    <option>$л</option>
-                                    <option>$ст</option>
+                                   @{
+                                       foreach(var measure in Model.Measuries)
+                                       {
+                                           <option value="@measure.Id">@measure.Name</option>
+                                       }
+                                   }
                                 </select>
                             </div>
                             <div class="ingredient">
@@ -42,7 +45,7 @@
 
 
     function addStep() {
-        var txt = `<div class="form-group form-horizontal step">
+        var txt = `<div class="form-group form-horizontal">
                         <hr class="black-border">
                         <div class="form-group">
                             <h5 class="col-md-2">Шаг </h5>
@@ -52,8 +55,9 @@
                                 </button>
                             </div>
                         </div>
-                        <textarea class="form-control " placeholder="Введите описание..." rows="3"></textarea>
+                        <textarea class="form-control " placeholder="Введите описание..." rows="3" name="textStepRecipe"></textarea>
                         <br>
+                        <input  name="fileInput" type="file" />
                         <button class="btn btn-default">
                             Загрузить фото
                             <span class="glyphicon glyphicon-open"></span>
@@ -77,30 +81,31 @@
 
             <div class="col-md-3"></div>
 
-            <form role="form" class="col-md-6">
+
+            <form role="form" class="col-md-6" method="post" action="NewRecipe" enctype="multipart/form-data" >
 
                 <div class="form-group">
                     <label>Название блюда</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="nameRecipe">
                 </div>
 
                 <div class="form-group">
                     <label>Краткое описание</label>
-                    <textarea class="form-control" placeholder="Введите описание..." rows="3"></textarea>
+                    <textarea class="form-control" placeholder="Введите описание..." rows="3" name="textRecipe"></textarea>
                 </div>
 
                 <div >
                     <label>Время приготовления</label>
                     <div class="form-horizontal">
                         <div class="form-group col-md-2">
-                            <input type="number" class="form-control ">
+                            <input type="number" class="form-control " name="hoursRecipe">
                         </div>
 
                         <div class="form-group col-md-2">
                             <h5 class="">ч. </h5>
                         </div>
                         <div class="form-group col-md-2">
-                            <input type="number" class="form-control ">
+                            <input type="number" class="form-control " name="minutesRecipe">
                         </div>
 
                         <div class="form-group col-md-2">
@@ -112,29 +117,45 @@
                 </div>
 
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label>Теги</label>
                     <div>
                         <input type="text" class="form-control" placeholder="Начните писать название тега...">
                     </div>
+                </div>*@
+
+                 <div class="form-group">
+                    <label>Теги</label>
+                     <div class="ui-widget">
+                         <input id="tags" size="50" name="tags">
+                     </div>
                 </div>
+
+
+
+            
+
+
 
                 <div>
                     <label>Ингредиенты</label>
                     <div id="ingredient">
                         <div class="form-horizontal">
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control" placeholder="Название">
+                                <input type="text" class="form-control" placeholder="Название" name="nameIngredientRecipe">
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="number" class="form-control" placeholder="Количество">
+                                <input type="number" class="form-control" placeholder="Количество" name="countngredientRecipe">
                             </div>
                             <div class="form-group col-md-4">
-                                <select class="form-control">
+                                <select class="form-control" name="measureIdRecipe">
                                     <option disabled selected>Ед. измерения</option>
-                                    <option>$кг</option>
-                                    <option>$л</option>
-                                    <option>$ст</option>
+                                   @{ 
+                                       foreach(var measure in Model.Measuries)
+                                       {
+                                           <option value="@measure.Id">@measure.Name</option>
+                                       }
+                                   }
                                 </select>
                             </div>
                             <div class="ingredient">
@@ -154,7 +175,7 @@
 
                 <label>Приготовление</label>
                 <div id="step">
-                    <div class="form-group form-horizontal step">
+                    <div class="form-group form-horizontal ">
                         <div class="form-group">
                             <h5 class="col-md-2">Шаг </h5>
                             <div class="step">
@@ -163,12 +184,15 @@
                                 </button>
                             </div>
                         </div>
-                        <textarea class="form-control " placeholder="Введите описание..." rows="3"></textarea>
+                        <textarea class="form-control " placeholder="Введите описание..." rows="3" name="textStepRecipe"></textarea>
                         <br>
-                        <button class="btn btn-default">
+                        <input  name="fileInput" type="file" >
+                        @*<button class="btn btn-default">
                             Загрузить фото
+                            
                             <span class="glyphicon glyphicon-open"></span>
-                        </button>
+                        </button>*@
+
                     </div>
                 </div>
                 <div>
@@ -196,7 +220,64 @@
 
 <script>
     steps = $('.step');
-    steps.click(function() {
+    steps.click(function () {
         $(this).parent().parent().remove();
+    });
+</script>
+
+
+
+<script>
+    $(function () {
+        var availableTags = [
+
+            @{
+                foreach(var tag in Model.Tags)
+                {
+
+                    <text>"@(tag.Name)",</text>
+
+
+                }
+            }
+        ];
+        function split(val) {
+            return val.split(/,\s*/);
+        }
+        function extractLast(term) {
+            return split(term).pop();
+        }
+
+        $("#tags")
+            // don't navigate away from the field on tab when selecting an item
+            .on("keydown", function (event) {
+                if (event.keyCode === $.ui.keyCode.TAB &&
+                    $(this).autocomplete("instance").menu.active) {
+                    event.preventDefault();
+                }
+            })
+            .autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    // delegate back to autocomplete, but extract the last term
+                    response($.ui.autocomplete.filter(
+                        availableTags, extractLast(request.term)));
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+                    var terms = split(this.value);
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push(ui.item.value);
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push("");
+                    this.value = terms.join(", ");
+                    return false;
+                }
+            });
     });
 </script>

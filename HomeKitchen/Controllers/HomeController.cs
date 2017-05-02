@@ -138,8 +138,48 @@ namespace HomeKitchen.Controllers
 
         public ActionResult NewRecipe()
         {
-            return View();
+            return View(db);
         }
+
+        [HttpPost]
+        public ActionResult NewRecipe(string nameRecipe, string textRecipe, int hoursRecipe, int minutesRecipe, string[] nameIngrediendRecipe, int[] countIngredienRecipe, int[] measureIdRecipe, string tags, string[] textStepRecipe, IEnumerable<HttpPostedFileBase> fileInput)
+        {
+           
+            Recipe recipe = new Recipe()
+            {
+                CookingTime = DateTime.Now,
+                DateOfCreation = DateTime.Now,
+                Name = nameRecipe,
+                PhotoUrl = "",
+                Preview = textRecipe,
+                User = db.Users.FirstOrDefault(i => i.Login == User.Identity.Name),
+                 Tags=new List<TagRecipe>(),
+                  Steps=new List<Step>()
+
+            };
+            db.Recipies.Add(recipe);
+            db.SaveChanges();
+            recipe = db.Recipies.FirstOrDefault(i=>i.Name==nameRecipe&&i.Preview==textRecipe);
+            string[] arrayOfTags = tags.Split(',');
+             foreach(var tag in arrayOfTags)
+            {
+                TagRecipe tagRecpe = new TagRecipe()
+                {
+                    Tag = db.Tags.FirstOrDefault(i => i.Name == tag),
+                    Recipe = recipe
+                };
+                recipe.Tags.Add(tagRecpe);
+                db.TagRecipies.Add(tagRecpe);
+                db.SaveChanges();
+            }
+
+
+            return Content("q");
+        }
+
+
+
+
 
         [HttpPost]
         public ActionResult SendMessage(int idRecipe, string text)
