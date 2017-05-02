@@ -105,7 +105,7 @@
                 <form name="search" id="search">
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Поиск" name="searchText" oninput="sendTags()">
+                        <input type="text" class="form-control black-border" placeholder="Поиск" name="searchText" oninput="sendTags()">
                     </div>
 
                     <br>
@@ -114,7 +114,7 @@
 
                         foreach (var category in Model)
                         {
-                            <div class="panel panel-default">
+                            <div class="panel panel-default black-border">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" href="#@category.Name">@category.Name</a>
@@ -137,14 +137,15 @@
                             </div>
                         }
                     }
+                    <br>
                 </form>
             </div>
         </div>
 
-
-        <div id="listRecipies">
+        <div class="col-md-9 white-panel">
+            <div id="listRecipies">
+            </div>
         </div>
-
     </div>
 
 </div>

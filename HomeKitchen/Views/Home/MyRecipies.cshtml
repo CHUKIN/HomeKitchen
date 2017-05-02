@@ -5,12 +5,12 @@
 @model HomeKitchen.Models.User
 
 <div class="container">
-    <div class="row">
+    <div class="row white-panel">
         <div class="col-md-12">
             <h2 class="text-center">Мои рецепты</h2><br>
 
-            <div class="form-group">
-                <a class="btn btn-default form-control" href="NewRecipe">Новый рецепт</a>
+            <div class="form-group text-center">
+                <a class="btn btn-default " href="NewRecipe">Новый рецепт</a>
             </div>
             <br>
 
@@ -22,8 +22,11 @@
                         <img class="img-rounded img-responsive" alt="Картинка" src="@recipe.PhotoUrl">
                         <h3>@recipe.Name</h3>
                         <p> @recipe.Preview</p>
-                        <p><span class="glyphicon glyphicon-heart"></span> @recipe.RecipeRating.Sum(i => i.Rating)</p>
-                        <p><a class="btn btn-default" href="Recipe/@recipe.Id" role="button">Подробнее »</a></p>
+                        <p>
+                            <span class="glyphicon glyphicon-heart"></span> @recipe.RecipeRating.Sum(i => i.Rating)</p>
+                        <p>
+                            <a class="btn btn-default" href="Recipe/@recipe.Id" role="button">Подробнее »</a>
+                        </p>
                     </div>
                 }
             }

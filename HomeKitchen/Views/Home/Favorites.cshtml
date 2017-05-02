@@ -4,23 +4,26 @@
 }
 @model HomeKitchen.Models.User
 <div class="container">
-<div class="row">
-    <div class="col-md-12">
-        <h2 class="text-center">Избранное</h2><br>
+    <div class="row white-panel">
+        <div class="col-md-12">
+            <h2 class="text-center">Избранное</h2><br>
 
-        @{
-            foreach (var recipe in Model.FavouriteRecipe)
-            {
-                <div class="col-md-3 text-center">
-                    <img class="img-rounded img-responsive" alt="Картинка" src="@recipe.Recipe.PhotoUrl">
-                    <h3>@recipe.Recipe.Name</h3>
-                    <p> @recipe.Recipe.Preview</p>
-                    <p><span class="glyphicon glyphicon-heart"></span> @recipe.Recipe.RecipeRating.Sum(i => i.Rating)</p>
-                    <p><a class="btn btn-default" href="Recipe/@recipe.Recipe.Id" role="button">Подробнее »</a></p>
-                </div>
+            @{
+                foreach (var recipe in Model.FavouriteRecipe)
+                {
+                    <div class="col-md-3 text-center">
+                        <img class="img-rounded img-responsive" alt="Картинка" src="@recipe.Recipe.PhotoUrl">
+                        <h3>@recipe.Recipe.Name</h3>
+                        <p> @recipe.Recipe.Preview</p>
+                        <p>
+                            <span class="glyphicon glyphicon-heart"></span> @recipe.Recipe.RecipeRating.Sum(i => i.Rating)</p>
+                        <p>
+                            <a class="btn btn-default" href="Recipe/@recipe.Recipe.Id" role="button">Подробнее »</a>
+                        </p>
+                    </div>
+                }
             }
-        }
 
+        </div>
     </div>
-</div>
 </div>

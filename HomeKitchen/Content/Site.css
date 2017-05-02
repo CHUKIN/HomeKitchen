@@ -48,7 +48,7 @@ body {
     background: #eee8db;
 }
 
-.btn-default {
+.btn-default, .btn-default:hover, .btn-default.active, .btn-default:active,.btn-default:focus {
     background: #d3ac6e;
     border-color: black;
 }
@@ -70,5 +70,14 @@ a, a:hover {
     color: black;
 }
 
+.panel-default > .panel-heading {
+    background-color: #d3ac6e;
+
+}
+
+.panel-body, input, textarea, .form-control{
+    background-color: #eee8db;
+    border-color: black;
+}
 
 

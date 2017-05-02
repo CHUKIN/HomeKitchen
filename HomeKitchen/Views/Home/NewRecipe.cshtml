@@ -8,7 +8,7 @@
     countIngredient = 1;
 
     function addIngredient() {
-        
+
         var txt = `<div class="form-horizontal"  >
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control" placeholder="Название">
@@ -34,7 +34,7 @@
         $("#ingredient").append(txt);
 
         ingredients = $('.ingredient');
-        ingredients.click(function () {
+        ingredients.click(function() {
             $(this).parent().remove();
         });
 
@@ -43,7 +43,7 @@
 
     function addStep() {
         var txt = `<div class="form-group form-horizontal step">
-                        <hr>
+                        <hr class="black-border">
                         <div class="form-group">
                             <h5 class="col-md-2">Шаг </h5>
                             <div class="step">
@@ -62,12 +62,11 @@
         $("#step").append(txt);
 
         steps = $('.step');
-        steps.click(function () {
+        steps.click(function() {
             $(this).parent().parent().remove();
         });
     }
 </script>
-
 
 
 <div class="container">
@@ -123,7 +122,7 @@
                 <div>
                     <label>Ингредиенты</label>
                     <div id="ingredient">
-                        <div class="form-horizontal"  >
+                        <div class="form-horizontal">
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control" placeholder="Название">
                             </div>
@@ -154,7 +153,7 @@
                 </div><br><br>
 
                 <label>Приготовление</label>
-                <div id = "step">
+                <div id="step">
                     <div class="form-group form-horizontal step">
                         <div class="form-group">
                             <h5 class="col-md-2">Шаг </h5>
@@ -190,7 +189,7 @@
 
 <script>
     ingredients = $('.ingredient');
-    ingredients.click(function () {
+    ingredients.click(function() {
         $(this).parent().remove();
     });
 </script>

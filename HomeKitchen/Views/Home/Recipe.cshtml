@@ -5,41 +5,36 @@
 <script>
     function switchFavourite() {
         $.getJSON('/Home/SwitchFavourite/@Model.Id',
-            function (data) {
+            function(data) {
                 var buttonFav = document.getElementById('buttonFavourite');
 
                 if (data === true) {
                     buttonFav.innerHTML = `<span class="glyphicon glyphicon-star"></span>`;
-                }
-                else {
+                } else {
                     buttonFav.innerHTML = `<span class="glyphicon glyphicon-star-empty"></span>`;
                 }
             });
 
     }
 
-     function switchLikes() {
+    function switchLikes() {
         $.getJSON('/Home/SwitchLikes/@Model.Id',
-            function (data) {
+            function(data) {
                 var buttonFav = document.getElementById('buttonLikes');
 
                 if (data === true) {
                     buttonFav.innerHTML = `<span class="glyphicon glyphicon-heart"></span>`;
-                }
-                else {
+                } else {
                     buttonFav.innerHTML = `<span class="glyphicon glyphicon-heart-empty"></span>`;
                 }
 
 
+                $.getJSON('/Home/Likes/@Model.Id',
+                    function(data) {
+                        var buttonFav = document.getElementById('likes');
+                        buttonFav.innerHTML = data;
 
-                 $.getJSON('/Home/Likes/@Model.Id',
-            function (data) {
-                var buttonFav = document.getElementById('likes');
-                buttonFav.innerHTML = data;
-                
-            });
-
-
+                    });
 
 
             });
@@ -48,31 +43,32 @@
 </script>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="text-center">@Model.Name</h2><br>
+    <div class="white-panel">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">@Model.Name</h2><br>
 
-            <div class="col-md-5">
-                <img class="img-rounded img-responsive" alt="Фото" src="@Model.PhotoUrl">
-                <br>
-            </div>
-            <div class="col-md-7">
-                <p>
-                    @Model.Preview
-                </p>
-                <label>Время пригототовления:</label>
-                <p>@Model.CookingTime</p>
-                <br>
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-md-1">Дата:</label>
-                        <p class="col-md-4">@Model.DateOfCreation</p>
-                        <label class="col-md-1">Автор:</label>
-                        <a class="col-md-4" href="~/Home/Account/@Model.User.Id">@Model.User.Login</a>
-                    </div>
+                <div class="col-md-5">
+                    <img class="img-rounded img-responsive" alt="Фото" src="@Model.PhotoUrl">
+                    <br>
                 </div>
-                
-                    <button class="btn btn-default col-md-1" type="submit" id="buttonLikes"  onclick="switchLikes()" >
+                <div class="col-md-7">
+                    <p>
+                        @Model.Preview
+                    </p>
+                    <label>Время пригототовления:</label>
+                    <p>@Model.CookingTime</p>
+                    <br>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-1">Дата:</label>
+                            <p class="col-md-4">@Model.DateOfCreation</p>
+                            <label class="col-md-1">Автор:</label>
+                            <a class="col-md-4" href="~/Home/Account/@Model.User.Id">@Model.User.Login</a>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-default col-md-1" type="submit" id="buttonLikes" onclick="switchLikes()">
                         @{
                             if (Model.RecipeRating.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
                             {
@@ -86,8 +82,8 @@
 
                     </button>
                     <h4 class="col-md-1" id="likes">@Model.RecipeRating.Sum(i => i.Rating)</h4>
-               
-                
+
+
                     <div class="col-md-1"></div>
 
                     <button class="btn btn-default col-md-1" type="submit" id="buttonFavourite" onclick="switchFavourite()">
@@ -105,89 +101,83 @@
 
                     </button>
                     <h5 class="col-md-1">Избранное</h5>
-                
-                
+
+
+                </div>
+
             </div>
-
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-horizontal">
-                <label class="col-md-1 control-label">Теги: </label>
-                <div class="col-md-11">
-                    <ul>
-                       @{
-                           foreach (var tag in Model.Tags)
-                           {
-                            <li class="btn btn-default">@tag.Tag.Name</li>
-                           }
-                    }
-                    </ul>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-horizontal">
+                    <label class="col-md-1 control-label">Теги: </label>
+                    <div class="col-md-11">
+                        <ul>
+                            @{
+                                foreach (var tag in Model.Tags)
+                                {
+                                    <li class="btn btn-default">@tag.Tag.Name</li>
+                                }
+                            }
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center">Ингредиенты</h4><br>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <ol>
 
 
-
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <h4 class="text-center">Ингредиенты</h4><br>
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <ol>
-
-                   
-                    @{
-                        foreach (var ingredient in Model.RecipeIngredient)
-                        {
-                            
-                            <li>@ingredient.Ingredient.Name @ingredient.Amount @ingredient.Measure.Name</li>
-                            
+                        @{
+                            foreach (var ingredient in Model.RecipeIngredient)
+                            {
+                                <li>@ingredient.Ingredient.Name @ingredient.Amount @ingredient.Measure.Name</li>
+                            }
                         }
-                    }
-                </ol>
+                    </ol>
+                </div>
+                <div class="col-md-3"></div>
             </div>
-            <div class="col-md-3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center">Приготовление</h4><br>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <ol>
+                        @{
+                            foreach (var step in Model.Steps)
+                            {
+                                <li>
+                                    <p>@step.Text</p>
+                                    <br>
+                                    <img class="img-rounded img-responsive" alt="Фото" src="@step.PhotoUrl">
+                                    <br>
+                                </li>
+                            }
+                        }
+
+
+                    </ol>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <h4 class="text-center">Приготовление</h4><br>
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <ol>
-                    @{
-                        foreach (var step in Model.Steps)
-                        {
-                            <li>
-                                <p>@step.Text</p>
-                                <br>
-                                <img class="img-rounded img-responsive" alt="Фото" src="@step.PhotoUrl">
-                                <br>
-                            </li>
-                        }
-                    }
-                    
-                   
-                </ol>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-    </div>
-
-    <hr>
+    <hr class="black-border">
     <div class="row">
         <div class="col-md-12">
             <h4 class="text-center">Комментарии</h4><br>
             <div class="form-horizontal">
 
-                <form class="form-group" method="post" action="/Home/SendMessage" >
+                <form class="form-group" method="post" action="/Home/SendMessage">
                     <div class="col-md-1">
                         <img class="img-circle img-responsive" alt="Фото" styles="height:50px, width:50px" src="@Model.User.UserProfile.PhotoUrl">
                     </div>
@@ -202,7 +192,7 @@
 
                 <br>
                 @{
-                    foreach (var comment in Model.Comments.OrderByDescending(i=>i.Date))
+                    foreach (var comment in Model.Comments.OrderByDescending(i => i.Date))
                     {
                         <div class="form-group">
                             <div class="col-md-1">
