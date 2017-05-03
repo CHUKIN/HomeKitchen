@@ -1,14 +1,14 @@
 ﻿@model HomeKitchen.Models.FavouriteRecipe
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Подробнее о избранном";
 }
 
-<h2>Details</h2>
+<h2>Подробнее о избранном</h2>
 
 <div>
-    <h4>FavouriteRecipe</h4>
-    <hr />
+    <h4>Избранное</h4>
+    <hr class="black-border"/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Recipe.Name)
@@ -29,6 +29,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактировать", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Назад", "Index")
 </p>

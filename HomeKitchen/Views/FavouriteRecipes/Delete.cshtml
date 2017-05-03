@@ -1,15 +1,15 @@
 ﻿@model HomeKitchen.Models.FavouriteRecipe
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Удаление из избранного";
 }
 
-<h2>Delete</h2>
+<h2>Удаление из избранного</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы уверены, что хотите удалить??</h3>
 <div>
-    <h4>FavouriteRecipe</h4>
-    <hr />
+    <h4>Избранное</h4>
+    <hr class="black-border"/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Recipe.Name)
@@ -33,8 +33,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <button type="submit" value="Delete" class="btn btn-default">Удалить</button> |
+            @Html.ActionLink("Назад", "Index")
         </div>
     }
 </div>
