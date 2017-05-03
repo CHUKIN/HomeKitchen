@@ -1,14 +1,14 @@
 ﻿@model HomeKitchen.Models.Tag
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Подробнее о теге";
 }
 
-<h2>Details</h2>
+<h2>Подробнее о теге</h2>
 
 <div>
-    <h4>Tag</h4>
-    <hr />
+    <h4>Тег</h4>
+    <hr class="black-border"/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Category.Name)
@@ -29,6 +29,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Назад", "Index")
 </p>
