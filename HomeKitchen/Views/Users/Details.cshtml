@@ -1,14 +1,14 @@
 ﻿@model HomeKitchen.Models.User
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Подробнее о пользователе";
 }
 
-<h2>Details</h2>
+<h2>Подробнее о пользователе</h2>
 
 <div>
-    <h4>User</h4>
-    <hr />
+    <h4>Пользователь</h4>
+    <hr class="black-border"/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Role.Name)
@@ -69,6 +69,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Назад", "Index")
 </p>
