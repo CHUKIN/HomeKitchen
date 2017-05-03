@@ -310,6 +310,7 @@
     <Content Include="Views\Home\MyRecipies.cshtml" />
     <Content Include="Views\Home\MyAccount.cshtml" />
     <Content Include="Views\Home\NewRecipe.cshtml" />
+    <Content Include="Views\Home\EditRecipe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

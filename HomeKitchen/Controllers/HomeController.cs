@@ -248,7 +248,10 @@ namespace HomeKitchen.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        public ActionResult EditRecipe()
+        {
+            return View();
+        }
 
 
     }
