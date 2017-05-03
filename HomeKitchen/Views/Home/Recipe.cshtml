@@ -57,7 +57,7 @@
                         @Model.Preview
                     </p>
                     <label>Время пригототовления:</label>
-                    <p>@Model.CookingTime</p>
+                    <p>@Model.CookingTime ч. @Model.CookingTime мин.</p>
                     <br>
                     <div class="form-horizontal">
                         <div class="form-group">
@@ -68,24 +68,32 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-default col-md-1" type="submit" id="buttonLikes" onclick="switchLikes()">
-                        @{
-                            if (Model.RecipeRating.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
-                            {
-                                <span class="glyphicon glyphicon-heart"></span>
-                            }
-                            else
-                            {
-                                <span class="glyphicon glyphicon-heart-empty"></span>
-                            }
-                        }
 
-                    </button>
-                    <h4 class="col-md-1" id="likes">@Model.RecipeRating.Sum(i => i.Rating)</h4>
-
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <button class="btn btn-default col-md-1" type="submit" id="buttonLikes" onclick="switchLikes()">
+                            @{
+                                if (Model.RecipeRating.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
+                                {
+                                    <span class="glyphicon glyphicon-heart"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                }
+                            }
+                        </button>
+                        <h4 class="col-md-1" id="likes">@Model.RecipeRating.Sum(i => i.Rating)</h4>
+                    }
+                    else
+                    {
+                        <h4 class="col-md-2" id="likes"><span class="glyphicon glyphicon-heart-empty"></span>   @Model.RecipeRating.Sum(i => i.Rating)</h4>
+                    }
 
                     <div class="col-md-1"></div>
 
+                @if (User.Identity.IsAuthenticated)
+                {
                     <button class="btn btn-default col-md-1" type="submit" id="buttonFavourite" onclick="switchFavourite()">
                         @{
                             if (Model.FavouriteRecipe.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
@@ -97,11 +105,13 @@
                                 <span class="glyphicon glyphicon-star-empty"></span>
                             }
                         }
-
-
                     </button>
                     <h5 class="col-md-1">Избранное</h5>
-
+                }
+                else
+                {
+                    <h5 class="col-md-4"><span class="glyphicon glyphicon-star-empty btn-lg"></span> Избранное</h5>
+                }
 
                 </div>
 
