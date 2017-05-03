@@ -46,6 +46,19 @@
     <div class="white-panel">
         <div class="row">
             <div class="col-md-12">
+
+
+            @{
+                if (User.Identity.Name == Model.Login)
+                {
+                    <div class="form-group text-center">
+                        <a class="btn btn-default " href="~/Views/Home/EditRecipe">Редактировать рецепт</a>
+                    </div>
+                    <br>
+
+                }
+            }
+
                 <h2 class="text-center">@Model.Name</h2><br>
 
                 <div class="col-md-5">
@@ -87,31 +100,31 @@
                     }
                     else
                     {
-                        <h4 class="col-md-2" id="likes"><span class="glyphicon glyphicon-heart-empty"></span>   @Model.RecipeRating.Sum(i => i.Rating)</h4>
+                        <h4 class="col-md-2" id="likes"><span class="glyphicon glyphicon-heart-empty"></span> @Model.RecipeRating.Sum(i => i.Rating)</h4>
                     }
 
                     <div class="col-md-1"></div>
 
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <button class="btn btn-default col-md-1" type="submit" id="buttonFavourite" onclick="switchFavourite()">
-                        @{
-                            if (Model.FavouriteRecipe.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
-                            {
-                                <span class="glyphicon glyphicon-star"></span>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <button class="btn btn-default col-md-1" type="submit" id="buttonFavourite" onclick="switchFavourite()">
+                            @{
+                                if (Model.FavouriteRecipe.FirstOrDefault(i => i.User.Login == User.Identity.Name) != null)
+                                {
+                                    <span class="glyphicon glyphicon-star"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                }
                             }
-                            else
-                            {
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            }
-                        }
-                    </button>
-                    <h5 class="col-md-1">Избранное</h5>
-                }
-                else
-                {
-                    <h5 class="col-md-4"><span class="glyphicon glyphicon-star-empty btn-lg"></span> Избранное</h5>
-                }
+                        </button>
+                        <h5 class="col-md-1">Избранное</h5>
+                    }
+                    else
+                    {
+                        <h5 class="col-md-4"><span class="glyphicon glyphicon-star-empty btn-lg"></span> Избранное</h5>
+                    }
 
                 </div>
 

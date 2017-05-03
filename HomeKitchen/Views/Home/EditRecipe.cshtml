@@ -1,7 +1,280 @@
 ﻿
 @{
-    ViewBag.Title = "EditRecipe";
+    ViewBag.Title = "Редактирование рецепта";
 }
 
-<h2>EditRecipe</h2>
+<script>
+    function addIngredient() {
 
+        var txt = `<div class="form-horizontal"  >
+                            <div class="form-group col-md-4">
+                                <input type="text" class="form-control" placeholder="Название" name="nameIngredientRecipe">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input type="number" class="form-control" placeholder="Количество" name="countngredientRecipe">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <select class="form-control" name="measureIdRecipe">
+                                    <option disabled selected>Ед. измерения</option>
+                                   @{
+                                       foreach(var measure in Model.Measuries)
+                                       {
+                                           <option value="@measure.Id">@measure.Name</option>
+                                       }
+                                   }
+                                </select>
+                            </div>
+                            <div class="ingredient">
+                                <button class="btn btn-default" type="button" >
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                            <br>
+                        </div>`;
+        $("#ingredient").append(txt);
+
+        ingredients = $('.ingredient');
+        ingredients.click(function() {
+            $(this).parent().remove();
+        });
+
+    }
+
+
+    function addStep() {
+        var txt = `<div class="form-group form-horizontal">
+                        <hr class="black-border">
+                        <div class="form-group">
+                            <h5 class="col-md-2">Шаг </h5>
+                            <div class="step">
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <textarea class="form-control " placeholder="Введите описание..." rows="3" name="textStepRecipe"></textarea>
+                        <br>
+                        <input  name="fileInput" type="file" />
+                        <button class="btn btn-default">
+                            Загрузить фото
+                            <span class="glyphicon glyphicon-open"></span>
+                        </button>
+                    </div>`;
+        $("#step").append(txt);
+
+        steps = $('.step');
+        steps.click(function() {
+            $(this).parent().parent().remove();
+        });
+    }
+</script>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <h2 class="text-center">Редактирование рецепта</h2><br>
+
+            <div class="col-md-3"></div>
+
+            <form role="form" class="col-md-6" method="post" action="" enctype="multipart/form-data" >
+
+                <div class="form-group">
+                    <label>Название блюда</label>
+                    <input type="text" class="form-control" name="nameRecipe">
+                </div>
+
+                <div class="form-group">
+                    <label>Фото блюда</label>
+                    <img class="img-rounded img-responsive" alt="Фото" src="">
+                    <input  name="fileInput" type="file">
+                </div>
+
+                <div class="form-group">
+                    <label>Краткое описание</label>
+                    <textarea class="form-control" placeholder="Введите описание..." rows="3" name="textRecipe"></textarea>
+                </div>
+
+                <div >
+                    <label>Время приготовления</label>
+                    <div class="form-horizontal">
+                        <div class="form-group col-md-2">
+                            <input type="number" class="form-control " name="hoursRecipe">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <h5 class="">ч. </h5>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <input type="number" class="form-control " name="minutesRecipe">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <h5 class=""> мин. </h5>
+                        </div>
+                    </div>
+
+                    <br><br><br>
+                </div>
+
+
+                @*<div class="form-group">
+                    <label>Теги</label>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Начните писать название тега...">
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    <label>Теги</label>
+                    <div class="ui-widget">
+                        <input id="tags" size="50" name="tags" class="form-control">
+                    </div>
+                </div>
+
+                <div>
+                    <label>Ингредиенты</label>
+                    <div id="ingredient">
+                        <div class="form-horizontal">
+                            <div class="form-group col-md-4">
+                                <input type="text" class="form-control" placeholder="Название" name="nameIngredientRecipe">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input type="number" class="form-control" placeholder="Количество" name="countngredientRecipe">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <select class="form-control" name="measureIdRecipe">
+                                    <option disabled selected>Ед. измерения</option>
+                                    @{
+                                        foreach(var measure in Model.Measuries)
+                                        {
+                                            <option value="@measure.Id">@measure.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="ingredient">
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-success " type="button" onclick="addIngredient()" id="btnAddIngredient">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div><br><br>
+
+                <label>Приготовление</label>
+                <div id="step">
+                    <div class="form-group form-horizontal ">
+                        <div class="form-group">
+                            <h5 class="col-md-2">Шаг </h5>
+                            <div class="step">
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <textarea class="form-control " placeholder="Введите описание..." rows="3" name="textStepRecipe"></textarea>
+                        <br>
+                        <img class="img-rounded img-responsive" alt="Фото" src="">
+                        <input  name="fileInput" type="file">
+                        @*<button class="btn btn-default">
+                            Загрузить фото
+
+                            <span class="glyphicon glyphicon-open"></span>
+                        </button>*@
+
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-success " type="button" onclick="addStep()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div><br><br>
+
+                <button type="submit" class="btn btn-default">Сохранить</button>
+
+            </form>
+
+            <div class="col-md-3"></div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    ingredients = $('.ingredient');
+    ingredients.click(function() {
+        $(this).parent().remove();
+    });
+</script>
+
+<script>
+    steps = $('.step');
+    steps.click(function () {
+        $(this).parent().parent().remove();
+    });
+</script>
+
+
+
+<script>
+    $(function () {
+        var availableTags = [
+
+            @{
+                foreach(var tag in Model.Tags)
+                {
+
+                    <text>"@(tag.Name)",</text>
+
+
+                }
+            }
+        ];
+        function split(val) {
+            return val.split(/,\s*/);
+        }
+        function extractLast(term) {
+            return split(term).pop();
+        }
+
+        $("#tags")
+            // don't navigate away from the field on tab when selecting an item
+            .on("keydown", function (event) {
+                if (event.keyCode === $.ui.keyCode.TAB &&
+                    $(this).autocomplete("instance").menu.active) {
+                    event.preventDefault();
+                }
+            })
+            .autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    // delegate back to autocomplete, but extract the last term
+                    response($.ui.autocomplete.filter(
+                        availableTags, extractLast(request.term)));
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+                    var terms = split(this.value);
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push(ui.item.value);
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push("");
+                    this.value = terms.join(", ");
+                    return false;
+                }
+            });
+    });
+</script>
