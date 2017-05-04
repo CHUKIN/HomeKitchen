@@ -6,20 +6,21 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="jumbotron">
-                <h2>Добро пожаловать на сайт, посвященный домашней кухне!</h2>
-                <p>Наш сайт поможет каждому найти и приготовить блюдо по его вкусу. Благодаря удобному поиску рецепта по тегам и названию, фотографиям блюд, подробному описанию приготовления можно легко найти наиболее подходящий рецепт. Кроме того, зарегистрированный пользователь может добавлять рецепты в избранное, добавлять свои рецепты, оценивать рецепты других пользователей. Также сайт обладает некоторыми элементами социальной сети и позволяет оставлять комментарии к рецептам.</p>
+            <img class="img-rounded img-responsive image" alt="Фото" src="http://ernieandbird.com.au/wp-content/uploads/2013/05/canstockphoto5250601.jpg">
+
+            <div class="text text-center">
+                <h2 class="">Добро пожаловать на сайт, посвященный домашней кухне!</h2>
+                <h3>Наш сайт поможет Вам не только найти рецепт блюда, но и вдохновит Вас на его приготовление!</h3>
 
             </div>
         </div>
     </div>
-    <div class="row white-panel">
+
+    <br>
+    <div class="row white-panel ">
         <div class="col-md-12">
-
-            @*по 4 в строке, можно просто последовательно добавлять для каждого*@
-
             @{
-                foreach (var recipe in Model.Recipies.Take(25))
+                foreach (var recipe in Model.Recipies.Take(12))
                 {
                     <div class="col-md-3 text-center">
                         <img class="img-rounded img-responsive" alt="Картинка" src="@recipe.PhotoUrl">
@@ -33,9 +34,6 @@
                     </div>
                 }
             }
-
-
-
 
         </div>
     </div>
