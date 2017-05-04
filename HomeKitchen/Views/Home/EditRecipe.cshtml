@@ -8,14 +8,13 @@
 
         var txt = `<div class="form-horizontal"  >
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control" placeholder="Название" name="nameIngredientRecipe">
+                                <input type="text" class="form-control" placeholder="Название" name="nameIngrediendRecipe" required="">
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="number" class="form-control" placeholder="Количество" name="countngredientRecipe">
+                                <input type="number" class="form-control" placeholder="Количество" name="countIngredienRecipe" required="" min="0">
                             </div>
                             <div class="form-group col-md-4">
                                 <select class="form-control" name="measureIdRecipe">
-                                    <option disabled selected>Ед. измерения</option>
                                    @{
                                        foreach(var measure in Model.Measuries)
                                        {
@@ -52,13 +51,9 @@
                                 </button>
                             </div>
                         </div>
-                        <textarea class="form-control " placeholder="Введите описание..." rows="3" name="textStepRecipe"></textarea>
+                        <textarea class="form-control " placeholder="Введите описание..." rows="3" name="textStepRecipe" required=""></textarea>
                         <br>
-                        <input  name="fileInput" type="file" />
-                        <button class="btn btn-default">
-                            Загрузить фото
-                            <span class="glyphicon glyphicon-open"></span>
-                        </button>
+                        <input  name="fileInput" type="file" required=""/>
                     </div>`;
         $("#step").append(txt);
 
@@ -82,32 +77,32 @@
 
                 <div class="form-group">
                     <label>Название блюда</label>
-                    <input type="text" class="form-control" name="nameRecipe">
+                    <input type="text" class="form-control" name="nameRecipe" required="">
                 </div>
 
                 <div class="form-group">
                     <label>Фото блюда</label>
                     <img class="img-rounded img-responsive" alt="Фото" src="">
-                    <input  name="fileInput" type="file">
+                    <input  name="fileInput" type="file" required="">
                 </div>
 
                 <div class="form-group">
                     <label>Краткое описание</label>
-                    <textarea class="form-control" placeholder="Введите описание..." rows="3" name="textRecipe"></textarea>
+                    <textarea class="form-control" placeholder="Введите описание..." rows="3" name="textRecipe" required=""></textarea>
                 </div>
 
                 <div >
                     <label>Время приготовления</label>
                     <div class="form-horizontal">
                         <div class="form-group col-md-2">
-                            <input type="number" class="form-control " name="hoursRecipe">
+                            <input type="number" class="form-control " name="hoursRecipe" required="" min="0">
                         </div>
 
                         <div class="form-group col-md-2">
                             <h5 class="">ч. </h5>
                         </div>
                         <div class="form-group col-md-2">
-                            <input type="number" class="form-control " name="minutesRecipe">
+                            <input type="number" class="form-control " name="minutesRecipe" required="" min="0" max="60">
                         </div>
 
                         <div class="form-group col-md-2">
@@ -129,7 +124,7 @@
                 <div class="form-group">
                     <label>Теги</label>
                     <div class="ui-widget">
-                        <input id="tags" size="50" name="tags" class="form-control">
+                        <input id="tags" size="50" name="tags" class="form-control" required="">
                     </div>
                 </div>
 
@@ -138,14 +133,13 @@
                     <div id="ingredient">
                         <div class="form-horizontal">
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control" placeholder="Название" name="nameIngredientRecipe">
+                                <input type="text" class="form-control" placeholder="Название" name="nameIngredientRecipe" required="">
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="number" class="form-control" placeholder="Количество" name="countngredientRecipe">
+                                <input type="number" class="form-control" placeholder="Количество" name="countngredientRecipe" required="" min="0">
                             </div>
                             <div class="form-group col-md-4">
                                 <select class="form-control" name="measureIdRecipe">
-                                    <option disabled selected>Ед. измерения</option>
                                     @{
                                         foreach(var measure in Model.Measuries)
                                         {
@@ -180,10 +174,10 @@
                                 </button>
                             </div>
                         </div>
-                        <textarea class="form-control " placeholder="Введите описание..." rows="3" name="textStepRecipe"></textarea>
+                        <textarea class="form-control " placeholder="Введите описание..." rows="3" name="textStepRecipe" required=""></textarea>
                         <br>
                         <img class="img-rounded img-responsive" alt="Фото" src="">
-                        <input  name="fileInput" type="file">
+                        <input  name="fileInput" type="file" required="">
                         @*<button class="btn btn-default">
                             Загрузить фото
 

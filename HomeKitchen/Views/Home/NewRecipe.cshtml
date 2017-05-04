@@ -12,7 +12,7 @@
                                 <input type="text" class="form-control" placeholder="Название" name="nameIngrediendRecipe" required="">
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="number" class="form-control" placeholder="Количество" name="countIngredienRecipe" required="">
+                                <input type="number" class="form-control" placeholder="Количество" name="countIngredienRecipe" required="" min="0">
                             </div>
                             <div class="form-group col-md-4">
                                 <select class="form-control" name="measureIdRecipe">
@@ -55,10 +55,6 @@
                         <textarea class="form-control " placeholder="Введите описание..." rows="3" name="textStepRecipe" required=""></textarea>
                         <br>
                         <input  name="fileInput" type="file" required=""/>
-                        <button class="btn btn-default">
-                            Загрузить фото
-                            <span class="glyphicon glyphicon-open"></span>
-                        </button>
                     </div>`;
         $("#step").append(txt);
 
@@ -100,14 +96,14 @@
                     <label>Время приготовления</label>
                     <div class="form-horizontal">
                         <div class="form-group col-md-2">
-                            <input type="number" class="form-control " name="hoursRecipe" required="">
+                            <input type="number" class="form-control " name="hoursRecipe" required="" min="0">
                         </div>
 
                         <div class="form-group col-md-2">
                             <h5 class="">ч. </h5>
                         </div>
                         <div class="form-group col-md-2">
-                            <input type="number" class="form-control " name="minutesRecipe" required="">
+                            <input type="number" class="form-control " name="minutesRecipe" required="" min="0" max="60">
                         </div>
 
                         <div class="form-group col-md-2">
@@ -141,7 +137,7 @@
                                 <input type="text" class="form-control" placeholder="Название" name="nameIngrediendRecipe" required="">
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="number" class="form-control" placeholder="Количество" name="countIngredienRecipe" required="">
+                                <input type="number" class="form-control" placeholder="Количество" name="countIngredienRecipe" required="" min="0">
                             </div>
                             <div class="form-group col-md-4">
                                 <select class="form-control" name="measureIdRecipe">
