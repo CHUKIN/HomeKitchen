@@ -49,7 +49,7 @@
 
 
             @{
-                if (User.Identity.Name == Model.Login)
+                if (User.Identity.Name == Model.User.Login)
                 {
                     <div class="form-group text-center">
                         <a class="btn btn-default " href="~/Views/Home/EditRecipe">Редактировать рецепт</a>
@@ -62,7 +62,7 @@
                 <h2 class="text-center">@Model.Name</h2><br>
 
                 <div class="col-md-5">
-                    <img class="img-rounded img-responsive" alt="Фото" src="@Model.PhotoUrl">
+                    <img class="img-rounded img-responsive" alt="Фото" src="../@Model.PhotoUrl">
                     <br>
                 </div>
                 <div class="col-md-7">
