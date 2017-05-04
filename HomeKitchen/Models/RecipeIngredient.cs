@@ -9,18 +9,28 @@ namespace HomeKitchen.Models
 {
     public class RecipeIngredient
     {
-        
 
 
-        [Key]
-        [ForeignKey("Ingredient"), Column(Order = 0)]
+
+        //[Key]
+        //[ForeignKey("Ingredient"), Column(Order = 0)]
+        //public int IngredientId { get; set; }
+        //public virtual Ingredient Ingredient { get; set; }
+
+        //[Key]
+        //[ForeignKey("Recipe"), Column(Order = 1)]
+        //public int ReceipeId { get; set; }
+        //public virtual Recipe Recipe { get; set; }
+    
+        public int Id { get; set; }
+
         public int IngredientId { get; set; }
         public virtual Ingredient Ingredient { get; set; }
 
-        [Key]
-        [ForeignKey("Recipe"), Column(Order = 1)]
-        public int ReceipeId { get; set; }
+
+        public int RecipeId { get; set; }
         public virtual Recipe Recipe { get; set; }
+
 
         public int MeasureId { get; set; }
         public virtual Measure Measure { get; set; }

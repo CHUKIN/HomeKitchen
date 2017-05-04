@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -142,39 +143,90 @@ namespace HomeKitchen.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewRecipe(string nameRecipe, string textRecipe, int hoursRecipe, int minutesRecipe, string[] nameIngrediendRecipe, int[] countIngredienRecipe, int[] measureIdRecipe, string tags, string[] textStepRecipe, IEnumerable<HttpPostedFileBase> fileInput)
+        public ActionResult NewRecipe( string[] nameIngrediendRecipe, int[] countIngredienRecipe, int[] measureIdRecipe,  string[] textStepRecipe, List<HttpPostedFileBase> fileInput, HttpPostedFileBase previewPhoto, string nameRecipe = "", string textRecipe = "", int hoursRecipe = 0, int minutesRecipe = 0, string tags = "")
         {
-           
+            DirectoryInfo Dir = new DirectoryInfo(Request.MapPath("~/Files/"));
+            if (Dir.EnumerateDirectories().FirstOrDefault(i => i.Name == User.Identity.Name) == null)
+            {
+                Dir.CreateSubdirectory(User.Identity.Name);
+            }
+
+            Dir = new DirectoryInfo(Request.MapPath("~/Files/"+ User.Identity.Name));
+            if (Dir.EnumerateDirectories().FirstOrDefault(i => i.Name == nameRecipe) == null)
+            {
+                Dir.CreateSubdirectory(nameRecipe);
+            }
+
+
+            previewPhoto.SaveAs(Server.MapPath("~/Files/"+User.Identity.Name+"/"+nameRecipe+"/" + previewPhoto.FileName));
             Recipe recipe = new Recipe()
             {
                 CookingTime = DateTime.Now,
                 DateOfCreation = DateTime.Now,
                 Name = nameRecipe,
-                PhotoUrl = "",
+                PhotoUrl = "../Files/" + User.Identity.Name + "/" + nameRecipe + "/" + previewPhoto.FileName,
                 Preview = textRecipe,
                 User = db.Users.FirstOrDefault(i => i.Login == User.Identity.Name),
-                 Tags=new List<TagRecipe>(),
-                  Steps=new List<Step>()
 
             };
             db.Recipies.Add(recipe);
-            db.SaveChanges();
-            recipe = db.Recipies.FirstOrDefault(i=>i.Name==nameRecipe&&i.Preview==textRecipe);
+
             string[] arrayOfTags = tags.Split(',');
-             foreach(var tag in arrayOfTags)
+            string result = "";
+            for(int j=0;j<arrayOfTags.Length-1;j++)
             {
+                var tag = arrayOfTags[j].Trim();
+                result += tag;
                 TagRecipe tagRecpe = new TagRecipe()
                 {
+                    
                     Tag = db.Tags.FirstOrDefault(i => i.Name == tag),
                     Recipe = recipe
                 };
-                recipe.Tags.Add(tagRecpe);
                 db.TagRecipies.Add(tagRecpe);
-                db.SaveChanges();
             }
 
 
-            return Content("q");
+            for(int j=0;j<textStepRecipe.Length;j++)
+            {
+                fileInput[j].SaveAs(Server.MapPath("~/Files/" + User.Identity.Name + "/" + nameRecipe + "/" + fileInput[j].FileName));
+                var newStep = new Step()
+                {
+                    PhotoUrl = "../Files/" + User.Identity.Name + "/" + nameRecipe + "/" + fileInput[j].FileName,
+                    Receipe = recipe,
+                    Text = textStepRecipe[j]
+                };
+            }
+
+
+            string resullt = "";
+            for(int j=0;j< countIngredienRecipe.Length;j++)
+            {
+                string name = nameIngrediendRecipe[j];
+                var ingredient = db.Ingredients.FirstOrDefault(i => i.Name == name);
+                if (ingredient == null)
+                {
+                    ingredient = new Ingredient()
+                    {
+
+                        Name = nameIngrediendRecipe[j]
+                    };
+                    db.Ingredients.Add(ingredient);
+                };
+
+
+
+                var newIngredient = new RecipeIngredient();
+
+                newIngredient.Amount = countIngredienRecipe[j];
+                newIngredient.Ingredient = ingredient;
+                newIngredient.Recipe = recipe;
+                newIngredient.Measure = db.Measuries.Find(measureIdRecipe[j]);
+                db.RecipeIngredients.Add(newIngredient);
+            }
+            db.SaveChanges();
+       
+            return RedirectToAction("NewRecipe");
         }
 
 

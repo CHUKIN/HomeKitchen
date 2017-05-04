@@ -62,7 +62,7 @@ namespace HomeKitchen.Controllers
 
             ViewBag.IngredientId = new SelectList(db.Ingredients, "Id", "Name", recipeIngredient.IngredientId);
             ViewBag.MeasureId = new SelectList(db.Measuries, "Id", "Name", recipeIngredient.MeasureId);
-            ViewBag.ReceipeId = new SelectList(db.Recipies, "Id", "Name", recipeIngredient.ReceipeId);
+            ViewBag.ReceipeId = new SelectList(db.Recipies, "Id", "Name", recipeIngredient.RecipeId);
             return View(recipeIngredient);
         }
 
@@ -80,7 +80,7 @@ namespace HomeKitchen.Controllers
             }
             ViewBag.IngredientId = new SelectList(db.Ingredients, "Id", "Name", recipeIngredient.IngredientId);
             ViewBag.MeasureId = new SelectList(db.Measuries, "Id", "Name", recipeIngredient.MeasureId);
-            ViewBag.ReceipeId = new SelectList(db.Recipies, "Id", "Name", recipeIngredient.ReceipeId);
+            ViewBag.ReceipeId = new SelectList(db.Recipies, "Id", "Name", recipeIngredient.RecipeId);
             return View(recipeIngredient);
         }
 
@@ -99,7 +99,7 @@ namespace HomeKitchen.Controllers
             }
             ViewBag.IngredientId = new SelectList(db.Ingredients, "Id", "Name", recipeIngredient.IngredientId);
             ViewBag.MeasureId = new SelectList(db.Measuries, "Id", "Name", recipeIngredient.MeasureId);
-            ViewBag.ReceipeId = new SelectList(db.Recipies, "Id", "Name", recipeIngredient.ReceipeId);
+            ViewBag.ReceipeId = new SelectList(db.Recipies, "Id", "Name", recipeIngredient.RecipeId);
             return View(recipeIngredient);
         }
 
