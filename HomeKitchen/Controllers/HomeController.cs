@@ -91,7 +91,7 @@ namespace HomeKitchen.Controllers
                     }
                     int count = recipeTags.Intersect(tags).Count();
                     string search = searchText ?? "";
-                    if (count==tags.Length&&recipe.Name.Contains(search))
+                    if (count==tags.Length&&recipe.Name.ToUpper().Contains(search.ToUpper()))
                     {
 
                             resultRecipe.Add(new RecipeAjax()
@@ -172,11 +172,16 @@ namespace HomeKitchen.Controllers
             };
             db.Recipies.Add(recipe);
 
-            string[] arrayOfTags = tags.Split(',').Distinct().ToArray();
+            string[] arrayOfTags = tags.Split(',');
+            for(int j=0;j<arrayOfTags.Length;j++)
+            {
+                arrayOfTags[j] = arrayOfTags[j].Trim();
+            }
+            arrayOfTags = arrayOfTags.Distinct().ToArray();
             string result = "";
             for(int j=0;j<arrayOfTags.Length-1;j++)
             {
-                var tag = arrayOfTags[j].Trim();
+                var tag = arrayOfTags[j];
                 result += tag;
 
                 var tagDb = db.Tags.FirstOrDefault(i => i.Name == tag);
