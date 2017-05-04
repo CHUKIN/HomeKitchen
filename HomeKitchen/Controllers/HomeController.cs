@@ -171,16 +171,23 @@ namespace HomeKitchen.Controllers
             };
             db.Recipies.Add(recipe);
 
-            string[] arrayOfTags = tags.Split(',');
+            string[] arrayOfTags = tags.Split(',').Distinct().ToArray();
             string result = "";
             for(int j=0;j<arrayOfTags.Length-1;j++)
             {
                 var tag = arrayOfTags[j].Trim();
                 result += tag;
+
+                var tagDb = db.Tags.FirstOrDefault(i => i.Name == tag);
+                if(tagDb==null)
+                {
+                    db.Tags.Add(new Tag { Name = tag, Category = db.Categorys.FirstOrDefault(i => i.Name == "Прочее") });
+                }
+
                 TagRecipe tagRecpe = new TagRecipe()
                 {
                     
-                    Tag = db.Tags.FirstOrDefault(i => i.Name == tag),
+                    Tag = tagDb,
                     Recipe = recipe
                 };
                 db.TagRecipies.Add(tagRecpe);
