@@ -70,7 +70,7 @@
                         @Model.Preview
                     </p>
                     <label>Время пригототовления:</label>
-                    <p>@Model.CookingTime ч. @Model.CookingTime мин.</p>
+                    <p>@Model.Hours ч. @Model.Minutes мин.</p>
                     <br>
                     <div class="form-horizontal">
                         <div class="form-group">
@@ -181,7 +181,7 @@
                                 <li>
                                     <p>@step.Text</p>
                                     <br>
-                                    <img class="img-rounded img-responsive" alt="Фото" src="@step.PhotoUrl">
+                                    <img class="img-rounded img-responsive" alt="Фото" src="../@step.PhotoUrl">
                                     <br>
                                 </li>
                             }

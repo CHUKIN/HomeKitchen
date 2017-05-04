@@ -161,7 +161,8 @@ namespace HomeKitchen.Controllers
             previewPhoto.SaveAs(Server.MapPath("~/Files/"+User.Identity.Name+"/"+nameRecipe+"/" + previewPhoto.FileName));
             Recipe recipe = new Recipe()
             {
-                CookingTime = DateTime.Now,
+                Hours=hoursRecipe,
+                Minutes=minutesRecipe,
                 DateOfCreation = DateTime.Now,
                 Name = nameRecipe,
                 PhotoUrl = "../Files/" + User.Identity.Name + "/" + nameRecipe + "/" + previewPhoto.FileName,
@@ -171,16 +172,23 @@ namespace HomeKitchen.Controllers
             };
             db.Recipies.Add(recipe);
 
-            string[] arrayOfTags = tags.Split(',');
+            string[] arrayOfTags = tags.Split(',').Distinct().ToArray();
             string result = "";
             for(int j=0;j<arrayOfTags.Length-1;j++)
             {
                 var tag = arrayOfTags[j].Trim();
                 result += tag;
+
+                var tagDb = db.Tags.FirstOrDefault(i => i.Name == tag);
+                if(tagDb==null)
+                {
+                    db.Tags.Add(new Tag { Name = tag, Category = db.Categorys.FirstOrDefault(i => i.Name == "Прочее") });
+                }
+
                 TagRecipe tagRecpe = new TagRecipe()
                 {
                     
-                    Tag = db.Tags.FirstOrDefault(i => i.Name == tag),
+                    Tag = tagDb,
                     Recipe = recipe
                 };
                 db.TagRecipies.Add(tagRecpe);
@@ -196,6 +204,7 @@ namespace HomeKitchen.Controllers
                     Receipe = recipe,
                     Text = textStepRecipe[j]
                 };
+                db.Steps.Add(newStep);
             }
 
 
@@ -223,6 +232,13 @@ namespace HomeKitchen.Controllers
                 newIngredient.Measure = db.Measuries.Find(measureIdRecipe[j]);
                 db.RecipeIngredients.Add(newIngredient);
             }
+
+
+
+
+
+
+
             db.SaveChanges();
        
             return RedirectToAction("NewRecipe");

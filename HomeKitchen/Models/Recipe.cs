@@ -11,7 +11,8 @@ namespace HomeKitchen.Models
         public string Name { get; set; }
         public string Preview { get; set; }
         public string PhotoUrl { get; set; }
-        public DateTime CookingTime { get; set; }
+        public int Hours { get; set; }
+        public int Minutes { get; set; }
         public DateTime DateOfCreation { get; set; }
 
         public int UserId { get; set; }
