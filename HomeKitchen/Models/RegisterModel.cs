@@ -20,6 +20,8 @@ namespace HomeKitchen.Models
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
+        public string Email { get; set; }
 
     }
 }
