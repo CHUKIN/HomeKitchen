@@ -65,7 +65,7 @@ namespace HomeKitchen.Controllers
                     // создаем нового пользователя
                     using (KitchenContext db = new KitchenContext())
                     {
-                        user = new User { Login = model.Login, Password = model.Password, DateOfRegistration = DateTime.Now, Role = db.Roles.Where(i => i.Name == "User").FirstOrDefault(), Email=""};
+                        user = new User { Login = model.Login, Password = model.Password, DateOfRegistration = DateTime.Now, Role = db.Roles.Where(i => i.Name == "User").FirstOrDefault(), Email=model.Email};
                         db.Users.Add(user);
                         var userProfile = new UserProfile()
                         {
