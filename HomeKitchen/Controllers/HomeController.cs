@@ -161,7 +161,8 @@ namespace HomeKitchen.Controllers
             previewPhoto.SaveAs(Server.MapPath("~/Files/"+User.Identity.Name+"/"+nameRecipe+"/" + previewPhoto.FileName));
             Recipe recipe = new Recipe()
             {
-                CookingTime = DateTime.Now,
+                Hours=hoursRecipe,
+                Minutes=minutesRecipe,
                 DateOfCreation = DateTime.Now,
                 Name = nameRecipe,
                 PhotoUrl = "../Files/" + User.Identity.Name + "/" + nameRecipe + "/" + previewPhoto.FileName,
@@ -203,6 +204,7 @@ namespace HomeKitchen.Controllers
                     Receipe = recipe,
                     Text = textStepRecipe[j]
                 };
+                db.Steps.Add(newStep);
             }
 
 
@@ -230,6 +232,13 @@ namespace HomeKitchen.Controllers
                 newIngredient.Measure = db.Measuries.Find(measureIdRecipe[j]);
                 db.RecipeIngredients.Add(newIngredient);
             }
+
+
+
+
+
+
+
             db.SaveChanges();
        
             return RedirectToAction("NewRecipe");
