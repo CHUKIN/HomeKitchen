@@ -199,7 +199,6 @@ namespace HomeKitchen.Controllers
             }
 
 
-            string resullt = "";
             for(int j=0;j< countIngredienRecipe.Length;j++)
             {
                 string name = nameIngrediendRecipe[j];
