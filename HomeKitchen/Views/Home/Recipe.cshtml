@@ -140,7 +140,9 @@
                             @{
                                 foreach (var tag in Model.Tags)
                                 {
-                                    <li class="btn btn-default">@tag.Tag.Name</li>
+                                    <li class="btn">
+                                        <a class="btn btn-default" href="../Search?tags=@tag.Tag.Name">@tag.Tag.Name</a>
+                                    </li>
                                 }
                             }
                         </ul>

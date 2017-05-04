@@ -91,7 +91,9 @@ namespace HomeKitchen.Controllers
                     }
                     int count = recipeTags.Intersect(tags).Count();
                     string search = searchText ?? "";
-                    if (count==tags.Length&&recipe.Name.ToUpper().Contains(search.ToUpper()))
+                    string name = recipe.Name.ToLower();
+                    search = search.ToLower(); 
+                    if (count==tags.Length&&name.Contains(search))
                     {
 
                             resultRecipe.Add(new RecipeAjax()
