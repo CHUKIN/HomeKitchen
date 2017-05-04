@@ -80,4 +80,17 @@ a, a:hover {
     border-color: black;
 }
 
+.text{
 
+    display:inline-block;
+    position: absolute;
+    top:0%;
+    left:5%;
+
+}
+.image{
+
+    display:inline-block;
+    position: relative;
+
+}
