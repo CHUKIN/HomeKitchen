@@ -20,7 +20,7 @@ namespace HomeKitchen.Controllers
 
         public ActionResult Search()
         {
-            return View(db.Categorys);
+            return View(db);
         }
 
         public ActionResult ChangeRecipe(int id)
@@ -79,14 +79,15 @@ namespace HomeKitchen.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetRecipies(string[] tags,string searchText)
+        public ActionResult GetRecipies(string[] tags,string searchText, string[] ingredients)
         {
+
             ICollection<RecipeAjax> resultRecipe = new List<RecipeAjax>();
             if (tags != null)
             {
                 ICollection<string> recipeTags = new List<string>();
+                ICollection<string> recipeIngredients = new List<string>();
 
-               
                 foreach (var recipe in db.Recipies)
                 {
                     recipeTags.Clear();
@@ -94,11 +95,23 @@ namespace HomeKitchen.Controllers
                     {
                         recipeTags.Add(tag.Tag.Name);
                     }
+                    int count2 = 0;
+                    int result = 0;
+                    if(ingredients!=null)
+                    {
+                        foreach (var ingredient in recipe.RecipeIngredient)
+                        {
+                            recipeIngredients.Add(ingredient.Ingredient.Name);
+                        }
+                        count2 = recipeIngredients.Intersect(ingredients).Count();
+                        result = ingredients.Length;
+                    }
                     int count = recipeTags.Intersect(tags).Count();
+                    
                     string search = searchText ?? "";
                     string name = recipe.Name.ToLower();
                     search = search.ToLower(); 
-                    if (count==tags.Length&&name.Contains(search))
+                    if (count==tags.Length&&name.Contains(search)&&count2==result)
                     {
 
                             resultRecipe.Add(new RecipeAjax()
