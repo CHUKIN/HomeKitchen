@@ -180,6 +180,10 @@
     <Compile Include="Migrations\201705042145146_256.Designer.cs">
       <DependentUpon>201705042145146_256.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705051616119_147.cs" />
+    <Compile Include="Migrations\201705051616119_147.Designer.cs">
+      <DependentUpon>201705051616119_147.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -350,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705042145146_256.resx">
       <DependentUpon>201705042145146_256.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705051616119_147.resx">
+      <DependentUpon>201705051616119_147.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

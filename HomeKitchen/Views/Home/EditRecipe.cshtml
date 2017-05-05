@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Редактирование рецепта";
 }
-
+@model HomeKitchen.Models.Recipe
 <script>
     function addIngredient() {
 
@@ -16,10 +16,10 @@
                             <div class="form-group col-md-4">
                                 <select class="form-control" name="measureIdRecipe">
                                    @{
-                                       foreach(var measure in Model.Measuries)
+                                       @*foreach(var measure in Model.Measuries)
                                        {
                                            <option value="@measure.Id">@measure.Name</option>
-                                       }
+                                       }*@
                                    }
                                 </select>
                             </div>
@@ -77,7 +77,7 @@
 
                 <div class="form-group">
                     <label>Название блюда</label>
-                    <input type="text" class="form-control" name="nameRecipe" required="">
+                    <input type="text" class="form-control" name="nameRecipe" required="" value="@Model.Name">
                 </div>
 
                 <div class="form-group">
@@ -138,16 +138,16 @@
                             <div class="form-group col-md-4">
                                 <input type="number" class="form-control" placeholder="Количество" name="countngredientRecipe" required="" min="0">
                             </div>
-                            <div class="form-group col-md-4">
+                            @*<div class="form-group col-md-4">
                                 <select class="form-control" name="measureIdRecipe">
                                     @{
-                                        foreach(var measure in Model.Measuries)
+                                        foreach(var measure in Model)
                                         {
                                             <option value="@measure.Id">@measure.Name</option>
                                         }
                                     }
                                 </select>
-                            </div>
+                            </div>*@
                             <div class="ingredient">
                                 <button class="btn btn-default" type="button">
                                     <span class="glyphicon glyphicon-remove"></span>
@@ -218,57 +218,3 @@
 
 
 
-<script>
-    $(function () {
-        var availableTags = [
-
-            @{
-                foreach(var tag in Model.Tags)
-                {
-
-                    <text>"@(tag.Name)",</text>
-
-
-                }
-            }
-        ];
-        function split(val) {
-            return val.split(/,\s*/);
-        }
-        function extractLast(term) {
-            return split(term).pop();
-        }
-
-        $("#tags")
-            // don't navigate away from the field on tab when selecting an item
-            .on("keydown", function (event) {
-                if (event.keyCode === $.ui.keyCode.TAB &&
-                    $(this).autocomplete("instance").menu.active) {
-                    event.preventDefault();
-                }
-            })
-            .autocomplete({
-                minLength: 0,
-                source: function (request, response) {
-                    // delegate back to autocomplete, but extract the last term
-                    response($.ui.autocomplete.filter(
-                        availableTags, extractLast(request.term)));
-                },
-                focus: function () {
-                    // prevent value inserted on focus
-                    return false;
-                },
-                select: function (event, ui) {
-                    var terms = split(this.value);
-                    // remove the current input
-                    terms.pop();
-                    // add the selected item
-                    terms.push(ui.item.value);
-                    // add placeholder to get the comma-and-space at the end
-                    terms.push("");
-                    this.value = terms.join(", ");
-                    return false;
-                }
-            });
-    });
-</script>

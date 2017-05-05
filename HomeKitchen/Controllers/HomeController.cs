@@ -23,6 +23,11 @@ namespace HomeKitchen.Controllers
             return View(db.Categorys);
         }
 
+        public ActionResult ChangeRecipe(int id)
+        {
+            return View(db.Recipies.Find(id));
+        }
+
         public ActionResult Account(int? id)
         {
             if(id==null)
@@ -224,7 +229,8 @@ namespace HomeKitchen.Controllers
                     ingredient = new Ingredient()
                     {
 
-                        Name = nameIngrediendRecipe[j]
+                        Name = nameIngrediendRecipe[j],
+                        Permission = 0
                     };
                     db.Ingredients.Add(ingredient);
                 };
