@@ -204,7 +204,7 @@
 
                 <form class="form-group" method="post" action="/Home/SendMessage">
                     <div class="col-md-1">
-                        <img class="img-circle img-responsive" alt="Фото" styles="height:50px, width:50px" src="@Model.User.UserProfile.PhotoUrl">
+                        <img class="img-circle img-responsive" alt="Фото" styles="height:50px, width:50px" src="../@Model.User.UserProfile.PhotoUrl">
                     </div>
                     <div class="col-md-11">
                         <label class="col-md-2">@User.Identity.Name</label>
@@ -221,7 +221,7 @@
                     {
                         <div class="form-group">
                             <div class="col-md-1">
-                                <img class="img-circle img-responsive" alt="Фото" styles="height:50px; width:50px" src="@comment.User.UserProfile.PhotoUrl">
+                                <img class="img-circle img-responsive" alt="Фото" styles="height:50px; width:50px" src="../@comment.User.UserProfile.PhotoUrl">
                             </div>
                             <div class="col-md-11">
                                 <label class="col-md-2">@comment.User.Login</label>

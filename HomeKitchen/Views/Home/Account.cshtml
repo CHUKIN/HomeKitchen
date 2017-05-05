@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <h2 class="text-center">Профиль</h2><br>
             <div class="col-md-3">
-                <img class="img-circle img-responsive" alt="Фото" src="@Model.UserProfile.PhotoUrl" styles="height:200px; width:200px">
+                <img class="img-circle img-responsive" alt="Фото" src="../@Model.UserProfile.PhotoUrl" styles="height:200px; width:200px">
                 <br>
                 @{
                     if (User.Identity.Name == Model.Login)
@@ -22,9 +22,14 @@
                     }
                 }
 
-
-                <p>@Html.ActionLink("Мои рецепты", "MyRecipies", "Home")</p>
-                <p>@Html.ActionLink("Избранное", "Favorites", "Home")</p>
+                @{
+                    if (User.Identity.Name==Model.Login)
+                    {
+                        <p>@Html.ActionLink("Мои рецепты", "MyRecipies", "Home")</p>
+                        <p>@Html.ActionLink("Избранное", "Favorites", "Home")</p>
+                    }
+                }
+             
 
 
             </div>

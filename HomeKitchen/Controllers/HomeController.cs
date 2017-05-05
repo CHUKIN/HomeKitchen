@@ -327,6 +327,52 @@ namespace HomeKitchen.Controllers
             return View();
         }
 
+        public ActionResult ChangePassword(string previousPassword, string newPassword)
+        {
+            var user = db.Users.FirstOrDefault(i=>i.Login==User.Identity.Name);
+            if (user.Password == previousPassword)
+            {
+                user.Password = newPassword;
+
+                db.SaveChanges();
+            }
+           
+           
+            return RedirectToAction("MyAccount");
+        }
+
+        public ActionResult ChangeInfo(string email, string gender, string name, DateTime? date)
+        {
+            var user = db.Users.FirstOrDefault(i => i.Login == User.Identity.Name);
+            user.Email = email;
+            user.UserProfile.Name = name;
+            user.UserProfile.Gender = gender;
+            if(date!=null) user.UserProfile.DateOfBirth = date.Value;
+            db.SaveChanges();
+            return RedirectToAction("MyAccount");
+        }
+
+        public ActionResult ChangeAvatar(HttpPostedFileBase fileInput)
+        {
+            var user = db.Users.FirstOrDefault(i => i.Login == User.Identity.Name);
+            DirectoryInfo Dir = new DirectoryInfo(Request.MapPath("~/Files/"));
+            if (Dir.EnumerateDirectories().FirstOrDefault(i => i.Name == user.Login) == null)
+            {
+                Dir.CreateSubdirectory(user.Login);
+            }
+
+
+
+
+            fileInput.SaveAs(Server.MapPath("~/Files/" + user.Login + "/" +  fileInput.FileName));
+            user.UserProfile.PhotoUrl = "../Files/" + User.Identity.Name + "/" + fileInput.FileName;
+
+
+
+
+                db.SaveChanges();
+            return RedirectToAction("MyAccount");
+        }
 
     }
 }
