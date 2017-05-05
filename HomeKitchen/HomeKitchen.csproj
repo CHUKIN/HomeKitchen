@@ -187,6 +187,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="Models\FavouriteRecipe.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\KitchenContext.cs" />
