@@ -380,5 +380,18 @@ namespace HomeKitchen.Controllers
             return RedirectToAction("MyAccount");
         }
 
+        public ActionResult DeleteRecipe(int id)
+        {
+            var recipe = db.Recipies.Find(id);
+            db.Comments.RemoveRange(recipe.Comments);
+            db.RecipeIngredients.RemoveRange(recipe.RecipeIngredient);
+            db.Steps.RemoveRange(recipe.Steps);
+            db.TagRecipies.RemoveRange(recipe.Tags);
+            db.FavouriteRecipies.RemoveRange(recipe.FavouriteRecipe);
+            db.RecipeRatings.RemoveRange(recipe.RecipeRating);
+            db.Recipies.Remove(recipe);
+            db.SaveChanges();
+            return RedirectToAction("Search");
+        }
     }
 }
