@@ -79,7 +79,7 @@ namespace HomeKitchen.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetRecipies(string[] tags,string searchText, string[] ingredients)
+        public ActionResult GetRecipies(string[] tags,string searchText)
         {
 
             ICollection<RecipeAjax> resultRecipe = new List<RecipeAjax>();
@@ -95,23 +95,12 @@ namespace HomeKitchen.Controllers
                     {
                         recipeTags.Add(tag.Tag.Name);
                     }
-                    int count2 = 0;
-                    int result = 0;
-                    if(ingredients!=null)
-                    {
-                        foreach (var ingredient in recipe.RecipeIngredient)
-                        {
-                            recipeIngredients.Add(ingredient.Ingredient.Name);
-                        }
-                        count2 = recipeIngredients.Intersect(ingredients).Count();
-                        result = ingredients.Length;
-                    }
+                  
                     int count = recipeTags.Intersect(tags).Count();
-                    
                     string search = searchText ?? "";
                     string name = recipe.Name.ToLower();
                     search = search.ToLower(); 
-                    if (count==tags.Length&&name.Contains(search)&&count2==result)
+                    if (count==tags.Length&&name.Contains(search))
                     {
 
                             resultRecipe.Add(new RecipeAjax()
