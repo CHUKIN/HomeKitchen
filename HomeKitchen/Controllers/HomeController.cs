@@ -15,6 +15,7 @@ namespace HomeKitchen.Controllers
 
         public ActionResult Index()
         {
+
             return View(db);
         }
 
