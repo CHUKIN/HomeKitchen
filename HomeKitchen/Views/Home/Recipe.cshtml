@@ -1,4 +1,5 @@
 ﻿@model HomeKitchen.Models.Recipe
+@using HomeKitchen.Models
 @{
     ViewBag.Title = Model.Name;
 }
@@ -202,18 +203,26 @@
             <h4 class="text-center">Комментарии</h4><br>
             <div class="form-horizontal">
 
-                <form class="form-group" method="post" action="/Home/SendMessage">
-                    <div class="col-md-1">
-                        <img class="img-circle img-responsive" alt="Фото" styles="height:50px, width:50px" src="../@Model.User.UserProfile.PhotoUrl">
-                    </div>
-                    <div class="col-md-11">
-                        <label class="col-md-2">@User.Identity.Name</label>
-                    </div>
-                    <div class="col-md-11">
-                        <textarea class="form-control" placeholder="Введите комментарий..." rows="3" name="text"></textarea>
-                        <button class="btn btn-default " type="submit" name="idRecipe" value="@Model.Id">Отправить</button>
-                    </div>
-                </form>
+
+                        @*                        <img class="img-circle img-responsive" alt="Фото" styles="height:50px, width:50px" src="../@Model.User.UserProfile.PhotoUrl">*@
+                        @{
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                <form class="form-group" method="post" action="/Home/SendMessage">
+                                    <div class="col-md-1">
+                                        <img class="img-circle img-responsive" alt="Фото" styles="height:50px, width:50px" src="../@CurrentUser.getInstance(User.Identity.Name).GetUser().UserProfile.PhotoUrl">
+                                    </div>
+                                    <div class="col-md-11">
+                                        <label class="col-md-2">@User.Identity.Name</label>
+                                    </div>
+                                    <div class="col-md-11">
+                                        <textarea class="form-control" placeholder="Введите комментарий..." rows="3" name="text"></textarea>
+                                        <button class="btn btn-default " type="submit" name="idRecipe" value="@Model.Id">Отправить</button>
+                                    </div>
+                                </form>
+                            }
+                        }
+
 
                 <br>
                 @{

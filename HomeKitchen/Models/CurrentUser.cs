@@ -5,7 +5,7 @@ using System.Web;
 
 namespace HomeKitchen.Models
 {
-    class CurrentUser
+    public class CurrentUser
     {
         private static CurrentUser instance;
 
